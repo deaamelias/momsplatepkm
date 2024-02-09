@@ -66,7 +66,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#fitur">Perhitungan</a>
+                    <a class="nav-link" href="#fitur">Cek Gizi</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#rekomendasi-makanan">Rekomendasi Makanan</a>
@@ -106,7 +106,7 @@
                     <div class="card-body text-center">
                         <img src="diet.png" class="img-fluid mb-3 img-menu" alt="Perhitungan Status Gizi">
                         <h3 class="card-title">Cek Status Gizi</h3>
-                        <p class="card-text">Hitung indeks massa tubuh (IMT) berdasarkan data berat badan dan tinggi badan pengguna.</p>
+                        <p class="card-text">Dengan fitur ini, Anda dapat mengetahui status gizi Anda dengan mudah. Lakukan perhitungan IMT untuk mengetahui apakah berat badan Anda ideal, kurang, atau berlebihan.</p>
                     </div>
                     <div class="card-footer">
                         <a href="cekgizi.php" class="btn btn-primary stretched-link">Mulai</a>
@@ -119,8 +119,8 @@
                 <div class="card h-100">
                     <div class="card-body text-center">
                         <img src="cek.png" class="img-fluid mb-3 img-menu" alt="Perhitungan IMT">
-                        <h3 class="card-title">Perhitungan Kebutuhan Gizi</h3>
-                        <p class="card-text">Lakukan perhitungan IMT dan berikan interpretasi hasilnya.</p>
+                        <h3 class="card-title">Cek Kebutuhan Kalori</h3>
+                        <p class="card-text">Dengan fitur ini, Anda dapat menghitung kebutuhan kalori harian Anda. Dapatkan informasi yang diperlukan untuk menjaga keseimbangan nutrisi dan gaya hidup sehat.</p>
                     </div>
                     <div class="card-footer">
                         <a href="cekkg.php" class="btn btn-primary stretched-link">Mulai</a>
@@ -131,22 +131,79 @@
     </div>
 </section>
 
-
-
-
-
-
 <!-- Rekomendasi Makanan Section -->
-<section id="rekomendasi-makanan" class="py-5 ">
-    <div class="container">
-        <h2><b><em>Rekomendasi Makanan</b></em></h2>
-        <p>Berikan rekomendasi makanan berdasarkan data yang dimasukkan pengguna.</p>
+<section id="rekomendasi-makanan" class="py-5">
+<div class="container">
+        <h2 class="text-center mb-4"><b>Rekomendasi Makanan untuk Ibu Hamil dan Pencegahan Diabetes Gestasional</b></h2>
+        <p class="lead text-center">Diabetes gestasional adalah kondisi di mana wanita hamil mengalami lonjakan gula darah yang tidak normal. Untuk mencegah diabetes gestasional dan menjaga kesehatan ibu dan bayi, berikut adalah rekomendasi makanan yang boleh dan tidak boleh dikonsumsi:</p>
+
+        <!-- Carousel -->
+        <div id="foodCarousel" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <div class="row align-items-center">
+                <div class="col-md-3">
+                    <div class="card">
+                        <img src="diet.png" class="card-img-top" alt="Sayuran Segar">
+                        <div class="card-body">
+                            <h5 class="card-title">Sayuran Segar</h5>
+                            <p class="card-text">Sayuran segar seperti bayam, brokoli, wortel, dan kacang hijau.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Tambahkan item makanan lainnya -->
+            </div>
+        </div>
+        <div class="carousel-item">
+            <div class="row align-items-center">
+                <div class="col-md-3">
+                    <div class="card">
+                        <img src="diet.png" class="card-img-top" alt="Buah-buahan">
+                        <div class="card-body">
+                            <h5 class="card-title">Buah-buahan</h5>
+                            <p class="card-text">Buah-buahan seperti apel, pir, jeruk, dan stroberi.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card">
+                        <img src="diet.png" class="card-img-top" alt="Buah-buahan">
+                        <div class="card-body">
+                            <h5 class="card-title">Buah-buahan</h5>
+                            <p class="card-text">Buah-buahan seperti apel, pir, jeruk, dan stroberi.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Tambahkan item makanan lainnya -->
+            </div>
+        </div>
+        <!-- Tambahkan carousel-item untuk item makanan lainnya -->
+    </div>
+    <a class="carousel-control-prev" href="#foodCarousel" role="button" data-slide="prev" style="top: 50%; transform: translateY(-50%);">
+        <span class="carousel-control-prev-icon" aria-hidden="true" style="color: #808080;"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#foodCarousel" role="button" data-slide="next" style="top: 50%; transform: translateY(-50%);">
+        <span class="carousel-control-next-icon" aria-hidden="true" style="color: #808080;"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+
+
+        <!-- End Carousel -->
+
+        <p class="mt-4">Perhatikan pola makan dan pastikan untuk mengonsumsi makanan seimbang serta berkonsultasi dengan dokter atau ahli gizi untuk rencana diet yang sesuai dengan kebutuhan Anda selama kehamilan.</p>
+        <div class="text-center">
+            <img src="bumil.jpeg" class="img-fluid mt-4" style="max-width: 500px;" alt="Rekomendasi Makanan untuk Ibu Hamil">
+        </div>
     </div>
 </section>
+
 
 <section id="konsultasi-online" class="py-5 bg-light">
     <div class="container">
         <h2 class="text-center"><b><em>Konsultasi Online</b></em></h2>
+        <p class="card-text">Dapatkan akses langsung untuk konsultasi pribadi tentang nutrisi, rencana diet, dan gaya hidup sehat. Sampaikan pertanyaan Anda, diskusikan tujuan kesehatan Anda, dan dapatkan saran yang disesuaikan untuk mencapai target gizi Anda.</p>
         <div class="row">
             <div class="col-lg-4 mb-4">
                 <div class="card h-100">
