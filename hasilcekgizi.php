@@ -1,3 +1,61 @@
+<?php
+session_start(); // Mulai sesi
+include 'koneksi.php';
+// Periksa apakah pengguna sudah login atau belum
+if(isset($_SESSION['id'])) {
+    // Jika sudah login, ambil user_id dari sesi
+    // Setelah proses login berhasil, simpan ID pengguna ke dalam sesi
+$_SESSION['id'] = $user_id; // $user_id adalah ID pengguna yang telah berhasil diautentikasi
+
+    $conn = new mysqli($servername, $username, $password, $dbname);
+
+    // Periksa koneksi
+    if ($conn->connect_error) {
+        die("Koneksi gagal: " . $conn->connect_error);
+    }
+
+    // Ambil data berat dan tinggi badan dari formulir
+    $berat = $_POST['berat'];
+    $tinggi = $_POST['tinggi'];
+
+    // Hitung indeks massa tubuh (IMT)
+    $tinggi_meter = $tinggi / 100;
+    $imt = $berat / ($tinggi_meter * $tinggi_meter);
+
+    // Tentukan status gizi berdasarkan IMT
+    if ($imt < 18.5) {
+        $status = "Berat badan kurang";
+        $rekomendasi = "Menu A";
+    } elseif ($imt >= 18.5 && $imt < 24.9) {
+        $status = "Berat badan normal";
+        $rekomendasi = "Menu B";
+    } elseif ($imt >= 24.9 && $imt < 29.9) {
+        $status = "Berat badan berlebih";
+        $rekomendasi = "Menu C";
+    } else {
+        $status = "Obesitas";
+        $rekomendasi = "Menu D";
+    }
+
+    // Buat kueri SQL untuk memasukkan data ke dalam tabel status_gizi
+    $sql = "INSERT INTO status_gizi (user_id, berat_badan, tinggi_badan, status_gizi) VALUES ('$user_id', '$berat', '$tinggi', '$status')";
+
+    // Eksekusi kueri SQL
+    if ($conn->query($sql) === TRUE) {
+        echo "Hasil perhitungan status gizi berhasil disimpan ke dalam database.";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+
+    // Tutup koneksi ke database
+    $conn->close();
+} else {
+    // Jika pengguna belum login, arahkan kembali ke halaman login atau lakukan tindakan yang sesuai
+    header("Location: index.php");
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -58,27 +116,6 @@
                 <h3 class="text-center mb-4">Hasil Perhitungan Status Gizi</h3>
                 <?php
                 // Ambil data berat dan tinggi badan dari formulir
-                $berat = $_POST['berat'];
-                $tinggi = $_POST['tinggi'];
-
-                // Hitung indeks massa tubuh (IMT)
-                $tinggi_meter = $tinggi / 100;
-                $imt = $berat / ($tinggi_meter * $tinggi_meter);
-
-                // Tentukan status gizi berdasarkan IMT
-                if ($imt < 18.5) {
-                    $status = "Berat badan kurang";
-                    $rekomendasi = "Menu A";
-                } elseif ($imt >= 18.5 && $imt < 24.9) {
-                    $status = "Berat badan normal";
-                    $rekomendasi = "Menu B";
-                } elseif ($imt >= 24.9 && $imt < 29.9) {
-                    $status = "Berat badan berlebih";
-                    $rekomendasi = "Menu C";
-                } else {
-                    $status = "Obesitas";
-                    $rekomendasi = "Menu D";
-                }
 
                 // Tampilkan hasil perhitungan
                 echo "<p><strong>Berat Badan:</strong> $berat kg</p>";
