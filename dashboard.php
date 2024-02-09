@@ -75,6 +75,10 @@
                     <a class="nav-link" href="#konsultasi-online">Konsultasi</a>
                 </li>
                 <li class="nav-item">
+    <a class="nav-link" href="view_profile.php">Akun</a>
+</li>
+
+                <li class="nav-item">
                     <a class="nav-link" href="logout.php">Logout</a>
                 </li>
             </ul>
