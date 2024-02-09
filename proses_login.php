@@ -23,7 +23,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $user = $result->fetch_assoc();
 
         // Set session untuk username
+        // Jika data ditemukan, ambil informasi pengguna
+        $user = $result->fetch_assoc();
+
+        // Set session untuk username
         $_SESSION['username'] = $username;
+
+        // Redirect berdasarkan peran (role) pengguna
+        if ($user['role'] === 'admin') {
+            // Jika peran pengguna adalah admin, redirect ke admin.php
+            header("Location: admin.php");
+            exit();
+        } else {
+            // Jika peran pengguna adalah user, redirect ke dashboard.php
+            header("Location: dashboard.php");
+            exit();
+        }
 
         // Redirect berdasarkan peran (role) pengguna
         if ($user['role'] === 'admin') {

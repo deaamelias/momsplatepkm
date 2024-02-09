@@ -1,4 +1,19 @@
 <?php
+
+session_start(); // Mulai sesi
+include 'koneksi.php';
+// Periksa apakah pengguna sudah login atau belum
+if(isset($_SESSION['id'])) {
+    // Jika sudah login, ambil user_id dari sesi
+    $user_id = $_SESSION['id'];
+    
+    // Ambil data dari formulir
+    $berat = $_POST['berat'];
+    $tinggi = $_POST['tinggi'];
+    $usia = $_POST['usia'];
+    $jenis_kelamin = $_POST['jenis_kelamin'];
+    $aktivitas_fisik = $_POST['aktivitas'];
+
 // Ambil data dari formulir
 $berat = $_POST['berat'];
 $tinggi = $_POST['tinggi'];
@@ -7,11 +22,8 @@ $jenis_kelamin = $_POST['jenis_kelamin'];
 
 // Hitung BMR (Basal Metabolic Rate) untuk wanita hamil
 // Berat badan saat hamil bisa digunakan untuk perhitungan
-if ($jenis_kelamin == 'pria') {
-    $bmr = 66 + (13.7 * $berat) + (5 * $tinggi) - (6.8 * $usia);
-} else {
-    $bmr = (655.10 + (9.56 * $berat) + (1.85 * $tinggi) - (4.68 * $usia));
-}
+$bmr = (655.10 + (9.56 * $berat) + (1.85 * $tinggi) - (4.68 * $usia));
+
 
 $aktivitas = $_POST['aktivitas']; // Ambil data aktivitas dari formulir
 switch ($aktivitas) {
@@ -31,17 +43,8 @@ switch ($aktivitas) {
         $fa = 1.5; // Default FA jika tidak ada pilihan yang dipilih
 }
 
-$fs = $_POST['fs']; // Ambil data faktor spesifik dari formulir
-switch ($fs) {
-    case 'hamil':
-        $fs = 1.1; // Misalnya, untuk ibu hamil, menggunakan FS 1.1
-        break;
-    case 'menyusui':
-        $fs = 1.2; // Misalnya, untuk ibu menyusui, menggunakan FS 1.2
-        break;
-    default:
-        $fs = 1.0; // Default FS jika tidak ada pilihan yang dipilih
-}
+$fs = 1.1; // Default FS jika tidak ada pilihan yang dipilih
+
 // Hitung TEE (Total Energy Expenditure) dengan memperhitungkan FA dan FS
 $tee = $bmr * $fa * $fs;
 
@@ -54,6 +57,20 @@ $lemak = $tee * 0.25; // Misalnya menggunakan 25% dari total kalori, dan 1 gram 
 // Hitung Kebutuhan Karbohidrat (gram/hari)
 $karbohidrat = $tee * 0.6; // Sisanya dari total kalori
 
+$sql = "INSERT INTO hasil_perhitungan (user_id, berat_badan, tinggi_badan, usia, jenis_kelamin, aktivitas_fisik) 
+            VALUES ('$user_id', '$berat', '$tinggi', '$usia', '$jenis_kelamin', '$aktivitas_fisik')";
+    
+    // Eksekusi kueri SQL
+    if ($conn->query($sql) === TRUE) {
+        echo "Hasil perhitungan berhasil disimpan.";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+} else {
+    // Jika pengguna belum login, arahkan kembali ke halaman login atau lakukan tindakan yang sesuai
+    header("Location: index.php");
+    exit;
+}
 // Tampilkan hasil perhitungan
 ?>
 

@@ -36,52 +36,70 @@
                 <div class="form-container">
                     <h2 class="text-center form-title">Pendaftaran Akun</h2>
                     <form action="proses_pendaftaran.php" method="post">
-                        <div class="form-group">
-                            <label for="inputUsername">Username</label>
-                            <input type="text" class="form-control" id="inputUsername" name="inputUsername" placeholder="Masukkan username" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputNama">Nama Lengkap</label>
-                            <input type="text" class="form-control" id="inputNama" name="inputNama" placeholder="Masukkan nama lengkap Anda" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputEmail">Email</label>
-                            <input type="email" class="form-control" id="inputEmail" name="inputEmail" placeholder="Masukkan alamat email Anda" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputTelepon">Nomor Telepon</label>
-                            <input type="tel" class="form-control" id="inputTelepon" name="inputTelepon" placeholder="Masukkan nomor telepon Anda" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputPassword">Password</label>
-                            <input type="password" class="form-control" id="inputPassword" name="inputPassword" placeholder="Buat kata sandi" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputConfirmPassword">Konfirmasi Password</label>
-                            <input type="password" class="form-control" id="inputConfirmPassword" name="inputConfirmPassword" placeholder="Ulangi kata sandi" required>
-                        </div>
-                        <hr>
-                        <h4 class="mb-3">Data Diri</h4>
-                        <div class="form-group">
-                            <label for="inputRiwayatPenyakit">Riwayat Penyakit</label>
-                            <input type="text" class="form-control" id="inputRiwayatPenyakit" name="inputRiwayatPenyakit" placeholder="Riwayat penyakit Anda">
-                        </div>
-                        <div class="form-group">
-                            <label for="inputRiwayatAlergi">Riwayat Alergi</label>
-                            <input type="text" class="form-control" id="inputRiwayatAlergi" name="inputRiwayatAlergi" placeholder="Riwayat alergi Anda">
-                        </div>
-                        <div class="form-group">
-                            <label for="inputJumlahAnak">Jumlah Anak</label>
-                            <input type="number" class="form-control" id="inputJumlahAnak" name="inputJumlahAnak" placeholder="Jumlah anak yang dimiliki">
-                        </div>
-                        <div class="form-group">
-                            <label for="inputParitas">Paritas</label>
-                            <input type="text" class="form-control" id="inputParitas" name="inputParitas" placeholder="Paritas">
-                        </div>
-                        <div class="form-group">
-                            <label for="inputUsiaKehamilan">Usia Kehamilan</label>
-                            <input type="text" class="form-control" id="inputUsiaKehamilan" name="inputUsiaKehamilan" placeholder="Usia kehamilan Anda">
-                        </div>
+                    <div class="form-group">
+    <label for="inputUsername">Username</label>
+    <input type="text" class="form-control" id="inputUsername" name="inputUsername" placeholder="Masukkan username" required minlength="3">
+</div>
+<div class="form-group">
+    <label for="inputNama">Nama Lengkap</label>
+    <input type="text" class="form-control" id="inputNama" name="inputNama" placeholder="Masukkan nama lengkap Anda" required>
+</div>
+<div class="form-group">
+    <label for="inputEmail">Email</label>
+    <input type="email" class="form-control" id="inputEmail" name="inputEmail" placeholder="Masukkan alamat email Anda" required>
+</div>
+<div class="form-group">
+    <label for="inputTelepon">Nomor Telepon</label>
+    <input type="tel" class="form-control" id="inputTelepon" name="inputTelepon" placeholder="Masukkan nomor telepon Anda" required>
+</div>
+<div class="form-group">
+    <label for="inputPassword">Password</label>
+    <div class="input-group">
+        <input type="password" class="form-control" id="inputPassword" name="inputPassword" placeholder="Buat kata sandi" required minlength="8">
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                <i class="fas fa-eye-slash"></i>
+            </button>
+        </div>
+    </div>
+    <small id="passwordHelp" class="form-text text-muted">Password harus memiliki minimal 8 karakter.</small>
+</div>
+<div class="form-group">
+    <label for="inputConfirmPassword">Konfirmasi Password</label>
+    <div class="input-group">
+        <input type="password" class="form-control" id="inputConfirmPassword" name="inputConfirmPassword" placeholder="Ulangi kata sandi" required minlength="8">
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                <i class="fas fa-eye-slash"></i>
+            </button>
+        </div>
+    </div>
+    <small id="passwordHelp" class="form-text text-muted">Password harus memiliki minimal 8 karakter.</small>
+</div>
+
+<hr>
+<h4 class="mb-3">Data Diri</h4>
+<div class="form-group">
+    <label for="inputRiwayatPenyakit">Riwayat Penyakit</label>
+    <input type="text" class="form-control" id="inputRiwayatPenyakit" name="inputRiwayatPenyakit" placeholder="Riwayat penyakit Anda">
+</div>
+<div class="form-group">
+    <label for="inputRiwayatAlergi">Riwayat Alergi</label>
+    <input type="text" class="form-control" id="inputRiwayatAlergi" name="inputRiwayatAlergi" placeholder="Riwayat alergi Anda">
+</div>
+<div class="form-group">
+    <label for="inputJumlahAnak">Jumlah Anak</label>
+    <input type="number" class="form-control" id="inputJumlahAnak" name="inputJumlahAnak" placeholder="Jumlah anak yang dimiliki" min="0">
+</div>
+<div class="form-group">
+    <label for="inputParitas">Paritas</label>
+    <input type="text" class="form-control" id="inputParitas" name="inputParitas" placeholder="Paritas">
+</div>
+<div class="form-group">
+    <label for="inputUsiaKehamilan">Usia Kehamilan (Bulan)</label>
+    <input type="number" class="form-control" id="inputUsiaKehamilan" name="inputUsiaKehamilan" placeholder="Usia kehamilan Anda" min="1" max="12">
+</div>
+
                         <button type="submit" class="btn btn-primary btn-block">Daftar</button>
                     </form>
                 </div>
@@ -94,6 +112,24 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- Font Awesome -->
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+<script>
+    // Mendapatkan referensi elemen input password dan tombol toggle
+    const passwordInput = document.getElementById('inputPassword');
+    const togglePasswordButton = document.getElementById('togglePassword');
+
+    // Menambahkan event listener untuk mengubah tipe input password
+    togglePasswordButton.addEventListener('click', function() {
+        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
+
+        // Mengubah ikon sesuai dengan tipe input
+        this.querySelector('i').classList.toggle('fa-eye-slash');
+        this.querySelector('i').classList.toggle('fa-eye');
+    });
+</script>
 
 </body>
 </html>
