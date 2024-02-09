@@ -80,27 +80,38 @@
                 <div class="card-body">
                     <h3 class="card-title">Perhitungan Status Gizi</h3>
                     <form action="hasilcekkg.php" method="post">
-                        <div class="form-group">
-                            <label for="berat">Berat Badan (kg)</label>
-                            <input type="number" class="form-control" id="berat" name="berat" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="tinggi">Tinggi Badan (cm)</label>
-                            <input type="number" class="form-control" id="tinggi" name="tinggi" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="usia">Usia (tahun)</label>
-                            <input type="number" class="form-control" id="usia" name="usia" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="jenis_kelamin">Jenis Kelamin</label>
-                            <select class="form-control" id="jenis_kelamin" name="jenis_kelamin" required>
-                                <option value="pria">Pria</option>
-                                <option value="wanita">Wanita</option>
-                            </select>
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-block">Hitung</button> <!-- Mengubah tombol menjadi full width -->
-                    </form>
+    <div class="form-group">
+        <label for="berat">Berat Badan (kg)</label>
+        <input type="number" class="form-control" id="berat" name="berat" required>
+    </div>
+    <div class="form-group">
+        <label for="tinggi">Tinggi Badan (cm)</label>
+        <input type="number" class="form-control" id="tinggi" name="tinggi" required>
+    </div>
+    <div class="form-group">
+        <label for="usia">Usia (tahun)</label>
+        <input type="number" class="form-control" id="usia" name="usia" required>
+    </div>
+    <div class="form-group">
+        <label for="aktivitas">Aktivitas Fisik</label>
+        <select class="form-control" id="aktivitas" name="aktivitas" required>
+        <option value="tidur">Aktivitas di tempat tidur</option>
+            <option value="ringan">Ringan</option>
+            <option value="sedang">Sedang</option>
+            <option value="berat">Berat</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="fs">Faktor Spesifik</label>
+        <select class="form-control" id="fs" name="fs" required>
+            <option value="standar">Standar</option>
+            <option value="hamil">Hamil</option>
+            <option value="menyusui">Menyusui</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary btn-block">Hitung</button> <!-- Mengubah tombol menjadi full width -->
+</form>
+
                 </div>
             </div>
         </div>
