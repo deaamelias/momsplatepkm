@@ -31,8 +31,6 @@ if ($result->num_rows > 0) {
 
 // Jika ada data yang dikirimkan melalui metode POST (untuk mengupdate profil)
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Ambil nilai inputan form
-    $new_username = $_POST['new_username'];
     $new_email = $_POST['new_email'];
     $new_telepon = $_POST['new_telepon'];
     $new_riwayat_penyakit = $_POST['new_riwayat_penyakit'];
@@ -41,29 +39,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $new_paritas = $_POST['new_paritas'];
     $new_usia_kehamilan = $_POST['new_usia_kehamilan'];
     
-    // Periksa apakah username baru sudah ada atau belum
-    $check_username_query = "SELECT * FROM users WHERE username = '$new_username'";
-    $check_username_result = $conn->query($check_username_query);
+    // Query SQL untuk mengupdate informasi pengguna kecuali username
+    $update_query = "UPDATE users SET email = '$new_email', telepon = '$new_telepon', riwayat_penyakit = '$new_riwayat_penyakit', riwayat_alergi = '$new_riwayat_alergi', jumlah_anak = '$new_jumlah_anak', paritas = '$new_paritas', usia_kehamilan = '$new_usia_kehamilan' WHERE username = '$username'";
     
-    if ($check_username_result->num_rows > 0) {
-        // Jika username sudah ada, tampilkan pesan kesalahan
-        $username_error = "Username sudah ada, mohon diganti.";
+    // Lakukan update pada database
+    if ($conn->query($update_query) === TRUE) {
+        // Redirect kembali ke halaman profil setelah update
+        header("Location: view_profile.php");
+        exit();
     } else {
-        // Jika username belum ada, lakukan update pada database
-        // Query SQL untuk mengupdate informasi pengguna termasuk username
-        $update_query = "UPDATE users SET username = '$new_username', email = '$new_email', telepon = '$new_telepon', riwayat_penyakit = '$new_riwayat_penyakit', riwayat_alergi = '$new_riwayat_alergi', jumlah_anak = '$new_jumlah_anak', paritas = '$new_paritas', usia_kehamilan = '$new_usia_kehamilan' WHERE username = '$username'";
-        
-        // Lakukan update pada database
-        if ($conn->query($update_query) === TRUE) {
-            // Redirect kembali ke halaman profil setelah update
-            $_SESSION['username'] = $new_username; // Update session username jika username berhasil diubah
-            header("Location: view_profile.php");
-            exit();
-        } else {
-            echo "Error updating record: " . $conn->error;
-        }
+        echo "Error updating record: " . $conn->error;
     }
 }
+
+
 
 // Tutup koneksi database
 $conn->close();
@@ -142,8 +131,7 @@ $conn->close();
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                 <div class="form-group">
                     <label for="username">Username</label>
-                    <input type="text" class="form-control" id="username" name="new_username" value="<?php echo $user['username']; ?>">
-                    <?php if(isset($username_error)) echo "<span class='text-danger'>$username_error</span>"; ?>
+                    <input type="text" class="form-control" id="username" value="<?php echo $user['username']; ?>" readonly>
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
@@ -179,6 +167,7 @@ $conn->close();
         </div>
     </div>
 </div>
+
 
 
 <!-- Bootstrap JS -->
