@@ -13,8 +13,37 @@ if ($jenis_kelamin == 'pria') {
     $bmr = (655.10 + (9.56 * $berat) + (1.85 * $tinggi) - (4.68 * $usia));
 }
 
-// Hitung TEE (Total Energy Expenditure)
-$tee = $bmr * 1.55; // Misalnya menggunakan faktor aktivitas 1.55
+$aktivitas = $_POST['aktivitas']; // Ambil data aktivitas dari formulir
+switch ($aktivitas) {
+    case 'tidur':
+        $fa = 1.2;
+        break;
+    case 'ringan':
+        $fa = 1.3;
+        break;
+    case 'sedang':
+        $fa = 1.5;
+        break;
+    case 'berat':
+        $fa = 2.0;
+        break;
+    default:
+        $fa = 1.5; // Default FA jika tidak ada pilihan yang dipilih
+}
+
+$fs = $_POST['fs']; // Ambil data faktor spesifik dari formulir
+switch ($fs) {
+    case 'hamil':
+        $fs = 1.1; // Misalnya, untuk ibu hamil, menggunakan FS 1.1
+        break;
+    case 'menyusui':
+        $fs = 1.2; // Misalnya, untuk ibu menyusui, menggunakan FS 1.2
+        break;
+    default:
+        $fs = 1.0; // Default FS jika tidak ada pilihan yang dipilih
+}
+// Hitung TEE (Total Energy Expenditure) dengan memperhitungkan FA dan FS
+$tee = $bmr * $fa * $fs;
 
 // Hitung Kebutuhan Protein (gram/hari)
 $protein = $tee * 0.15; // Misalnya menggunakan 1.1 gram protein per kilogram berat badan untuk ibu hamil
@@ -78,7 +107,7 @@ $karbohidrat = $tee * 0.6; // Sisanya dari total kalori
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="cekgizi.php">Kembali</a>
+                    <a class="nav-link" href="cekkg.php">Kembali</a>
                 </li>
             </ul>
         </div>
@@ -92,14 +121,16 @@ $karbohidrat = $tee * 0.6; // Sisanya dari total kalori
         <div class="result-container">
             <h2 class="text-center">Hasil Perhitungan Kebutuhan Zat Gizi untuk Ibu Hamil</h2>
             <img src="cek.png" class="img-fluid mb-3 img-menu" alt="Perhitungan IMT">
-            <p>Kebutuhan BMR: <b><?php echo round($bmr, 2); ?> </b>kalori/hari</p>
-            <p>Kebutuhan TEE: <b><?php echo round($tee, 2); ?> </b>kalori/hari</p>
+            <p>BMR (Basal Metabolic Rate): <b><?php echo round($bmr, 2); ?> </b>kalori/hari</p>
+            <p>TEE (Total Energy Expenditure): <b><?php echo round($tee, 2); ?> </b>kalori/hari</p>
             <p>Kebutuhan Protein: <b><?php echo round($protein, 2); ?> </b>gram/hari</p>
             <p>Kebutuhan Lemak: <b><?php echo round($lemak, 2); ?> </b>gram/hari</p>
             <p>Kebutuhan Karbohidrat: <b><?php echo round($karbohidrat, 2); ?> </b>gram/hari</p>
         </div>
     </div>
 </div>
+
+
 
             <!-- Container untuk rekomendasi makanan -->
             <div class="recommendation-container" style="margin-top: 50px;">

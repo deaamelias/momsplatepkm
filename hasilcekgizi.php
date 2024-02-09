@@ -84,7 +84,9 @@
                 echo "<p><strong>Berat Badan:</strong> $berat kg</p>";
                 echo "<p><strong>Tinggi Badan:</strong> $tinggi cm</p>";
                 echo "<p><strong>Indeks Massa Tubuh (IMT):</strong> " . number_format($imt, 2) . "</p>";
-                echo "<p><strong>Status Gizi:</strong> $status</p>";
+                echo "<p><strong>Status Gizi:</strong> <span style='color: green;'>$status</span></p>";
+
+
                 ?>
             </div>
 
