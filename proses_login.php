@@ -15,13 +15,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $hashed_password = hash('sha256', $password);
 
     // Query SQL untuk memeriksa kredensial pengguna
-    $query = "SELECT * FROM users WHERE username = '$username' AND password = '$hashed_password'";
+    $query = "SELECT id, username FROM users WHERE username = '$username' AND password = '$hashed_password'";
     $result = $conn->query($query);
 
     if ($result->num_rows > 0) {
-        // Jika data ditemukan, set session dan pesan kesalahan menjadi kosong
-        $_SESSION['username'] = $username;
-        $_SESSION['login_error'] = '';
+        // Jika data ditemukan, ambil ID pengguna
+        $user = $result->fetch_assoc();
+        $user_id = $user['id'];
+
+        // Set session ID pengguna
+        $_SESSION['user_id'] = $user_id;
 
         // Redirect ke halaman dashboard
         header("Location: dashboard.php");
@@ -29,9 +32,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         // Jika data tidak ditemukan, set pesan kesalahan
         $_SESSION['login_error'] = "Username atau password salah.";
+        
+        // Redirect ke halaman login kembali
+        header("Location: index.php");
+        exit();
     }
-    // Redirect ke halaman login kembali
-    header("Location: index.php");
-    exit();
 }
 ?>
