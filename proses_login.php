@@ -19,19 +19,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = $conn->query($query);
 
     if ($result->num_rows > 0) {
-        // Jika data ditemukan, set session dan pesan kesalahan menjadi kosong
-        $_SESSION['username'] = $username;
-        $_SESSION['login_error'] = '';
+        // Jika data ditemukan, ambil informasi pengguna
+        $user = $result->fetch_assoc();
 
-        // Redirect ke halaman dashboard
-        header("Location: dashboard.php");
-        exit();
+        // Set session untuk username
+        $_SESSION['username'] = $username;
+
+        // Redirect berdasarkan peran (role) pengguna
+        if ($user['role'] === 'admin') {
+            // Jika peran pengguna adalah admin, redirect ke admin.php
+            header("Location: admin.php");
+            exit();
+        } else {
+            // Jika peran pengguna adalah user, redirect ke dashboard.php
+            header("Location: dashboard.php");
+            exit();
+        }
     } else {
         // Jika data tidak ditemukan, set pesan kesalahan
         $_SESSION['login_error'] = "Username atau password salah.";
+        
+        // Redirect ke halaman login kembali
+        header("Location: index.php");
+        exit();
     }
-    // Redirect ke halaman login kembali
-    header("Location: index.php");
-    exit();
 }
 ?>
