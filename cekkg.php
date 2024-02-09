@@ -95,18 +95,10 @@
     <div class="form-group">
         <label for="aktivitas">Aktivitas Fisik</label>
         <select class="form-control" id="aktivitas" name="aktivitas" required>
-        <option value="tidur">Aktivitas di tempat tidur</option>
+        <option value="tidur">Hanya di tempat tidur</option>
             <option value="ringan">Ringan</option>
             <option value="sedang">Sedang</option>
             <option value="berat">Berat</option>
-        </select>
-    </div>
-    <div class="form-group">
-        <label for="fs">Faktor Spesifik</label>
-        <select class="form-control" id="fs" name="fs" required>
-            <option value="standar">Standar</option>
-            <option value="hamil">Hamil</option>
-            <option value="menyusui">Menyusui</option>
         </select>
     </div>
     <button type="submit" class="btn btn-primary btn-block">Hitung</button> <!-- Mengubah tombol menjadi full width -->
