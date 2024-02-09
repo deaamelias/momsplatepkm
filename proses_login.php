@@ -19,23 +19,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = $conn->query($query);
 
     if ($result->num_rows > 0) {
-        // Jika data ditemukan, ambil ID pengguna
+        // Jika data ditemukan, ambil informasi pengguna
         $user = $result->fetch_assoc();
+    
+        // Ambil ID pengguna
         $user_id = $user['id'];
-
+    
         // Set session ID pengguna
         $_SESSION['user_id'] = $user_id;
-
+    
         // Redirect ke halaman dashboard
         header("Location: dashboard.php");
         exit();
     } else {
         // Jika data tidak ditemukan, set pesan kesalahan
         $_SESSION['login_error'] = "Username atau password salah.";
-        
+    
         // Redirect ke halaman login kembali
         header("Location: index.php");
         exit();
     }
+    
 }
 ?>
