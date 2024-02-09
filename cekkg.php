@@ -80,13 +80,14 @@
                 <div class="card-body">
                     <h3 class="card-title">Perhitungan Status Gizi</h3>
                     <form action="hasilcekkg.php" method="post">
-    <div class="form-group">
-        <label for="berat">Berat Badan (kg)</label>
-        <input type="number" class="form-control" id="berat" name="berat" required>
-    </div>
-    <div class="form-group">
+                    <div class="form-group">
         <label for="tinggi">Tinggi Badan (cm)</label>
         <input type="number" class="form-control" id="tinggi" name="tinggi" required>
+    </div>
+    
+                    <div class="form-group">
+        <label for="berat">Berat Badan (kg)</label>
+        <input type="number" class="form-control" id="berat" name="berat" required>
     </div>
     <div class="form-group">
         <label for="usia">Usia (tahun)</label>

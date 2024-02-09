@@ -1,4 +1,19 @@
 <?php
+
+session_start(); // Mulai sesi
+include 'koneksi.php';
+// Periksa apakah pengguna sudah login atau belum
+if(isset($_SESSION['id'])) {
+    // Jika sudah login, ambil user_id dari sesi
+    $user_id = $_SESSION['id'];
+    
+    // Ambil data dari formulir
+    $berat = $_POST['berat'];
+    $tinggi = $_POST['tinggi'];
+    $usia = $_POST['usia'];
+    $jenis_kelamin = $_POST['jenis_kelamin'];
+    $aktivitas_fisik = $_POST['aktivitas'];
+
 // Ambil data dari formulir
 $berat = $_POST['berat'];
 $tinggi = $_POST['tinggi'];
@@ -42,6 +57,20 @@ $lemak = $tee * 0.25; // Misalnya menggunakan 25% dari total kalori, dan 1 gram 
 // Hitung Kebutuhan Karbohidrat (gram/hari)
 $karbohidrat = $tee * 0.6; // Sisanya dari total kalori
 
+$sql = "INSERT INTO hasil_perhitungan (user_id, berat_badan, tinggi_badan, usia, jenis_kelamin, aktivitas_fisik) 
+            VALUES ('$user_id', '$berat', '$tinggi', '$usia', '$jenis_kelamin', '$aktivitas_fisik')";
+    
+    // Eksekusi kueri SQL
+    if ($conn->query($sql) === TRUE) {
+        echo "Hasil perhitungan berhasil disimpan.";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+} else {
+    // Jika pengguna belum login, arahkan kembali ke halaman login atau lakukan tindakan yang sesuai
+    header("Location: index.php");
+    exit;
+}
 // Tampilkan hasil perhitungan
 ?>
 
