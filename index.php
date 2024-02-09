@@ -62,6 +62,19 @@
             width: 90%;
             max-width: 600px; /* Atur lebar maksimum gambar */
         }
+
+        .navbar-logo {
+      margin-right: 10px;
+    }
+    .navbar .nav-item:last-child .nav-link {
+      background-color: #007bff;
+      color: white;
+      border-radius: 5px;
+      padding: 8px 15px;
+    }
+    .navbar .nav-item:last-child .nav-link:hover {
+      background-color: #0056b3;
+    }
     </style>
 </head>
 <body>
@@ -87,9 +100,6 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#about">Tentang Kami</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#contact">Kontak</a>
-                </li>
                 <!-- Form login -->
                 <li class="nav-item">
                     <a class="nav-link" href="#" data-toggle="modal" data-target="#loginModal">Login</a>
@@ -106,7 +116,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="loginModalLabel">Login</h5>
+                <h5 class="modal-title" id="loginModalLabel">Login Mom's Plate</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -125,6 +135,12 @@
                         <input type="checkbox" class="form-check-input" id="rememberMe" name="rememberMe">
                         <label class="form-check-label" for="rememberMe">Ingat Kata Sandi</label>
                     </div>
+                    <!-- Pesan kesalahan -->
+                    <?php if(isset($_SESSION['login_error'])): ?>
+                        <div class="alert alert-danger" role="alert">
+                            <?php echo $_SESSION['login_error']; ?>
+                        </div>
+                    <?php endif; ?>
                     <button type="submit" class="btn btn-primary btn-block">Login</button>
                 </form>
             </div>
@@ -234,58 +250,6 @@
         </div>
     </div>
 </section>
-
-<!-- Contact Section -->
-<section id="contact">
-    <div class="container">
-        <h2 class="text-center"><b><em>Kontak</em></b></h2>
-        <div class="row">
-            <div class="col-lg-6 animate__animated animate__fadeIn">
-                <h3>Informasi Kontak</h3>
-                <p>Silakan hubungi kami melalui telepon atau email untuk informasi lebih lanjut tentang layanan kami.</p>
-            </div>
-            <div class="col-lg-6 animate__animated animate__fadeIn">
-                <h3>Formulir Kontak</h3>
-                <p>Kirimkan pesan melalui formulir kontak di bawah ini dan kami akan segera meresponsnya.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Contact Section -->
-<section id="contact" class="py-5 bg-light">
-    <div class="container">
-        <h2 class="text-center mb-5"><b><em>Kontak</em></b></h2>
-        <div class="row">
-            <div class="col-lg-4">
-                <div class="card shadow">
-                    <div class="card-body">
-                        <h3 class="card-title">Hubungi Kami</h3>
-                        <p class="card-text">Silakan hubungi kami melalui telepon atau email untuk informasi lebih lanjut tentang layanan kami.</p>
-                        <a href="https://wa.me/6281234567890" target="_blank" class="btn btn-success btn-block">
-                            <img src="whatsapp.png" alt="WhatsApp" class="mr-2" style="max-width: 30px;"> WhatsApp: 081234567890
-                        </a>
-                        <a href="tel:+6281234567890" class="btn btn-primary btn-block mt-3">Telepon: 081234567890</a>
-                        <a href="mailto:info@example.com" class="btn btn-info btn-block mt-3">Email: info@example.com</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="card shadow">
-                    <div class="card-body">
-                        <h3 class="card-title">Nomor Darurat</h3>
-                        <p class="card-text">Kami siap membantu Anda kapan pun Anda membutuhkan.</p>
-                        <a href="tel:+6281234567891" class="btn btn-danger btn-block">
-                            <img src="phone.png" alt="Nomor Darurat" class="mr-2" style="max-width: 30px;"> Darurat: 081234567891
-                        </a>
-                        <a href="tel:+6281234567892" class="btn btn-warning btn-block mt-3">Darurat: 081234567892</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
 
 <!-- Footer -->
 <footer class="py-4 bg-dark text-white text-center">
