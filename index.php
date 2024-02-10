@@ -217,9 +217,8 @@
 
 
 
-<!-- Articles Section -->
 <section id="articles">
-    <div class="container ">
+    <div class="container">
         <h2 class="text-center animate__animated animate__zoomIn"><b><em>Artikel dan Informasi</em></b></h2>
         <div class="row">
             <div class="col-lg-4 animate__animated animate__zoomIn">
@@ -230,9 +229,15 @@
                 <h3>Video dan Infografis</h3>
                 <p>Kami menyediakan video dan infografis yang menjelaskan topik-topik penting terkait nutrisi selama kehamilan secara visual.</p>
             </div>
+            <div class="col-lg-4 animate__animated animate__zoomIn">
+                <h3>More Information</h3>
+                <p>Temukan informasi lebih lanjut tentang diabetes gestasional.</p>
+                <a href="info.php" class="btn btn-primary">More Information</a>
+            </div>
         </div>
     </div>
 </section>
+
 
 <!-- About Section -->
 <section id="about">
