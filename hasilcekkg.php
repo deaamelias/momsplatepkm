@@ -49,12 +49,12 @@ $lemak = $tee * 0.25; // Misalnya menggunakan 25% dari total kalori, dan 1 gram 
 // Hitung Kebutuhan Karbohidrat (gram/hari)
 $karbohidrat = $tee * 0.6; // Sisanya dari total kalori
 
-$sql = "INSERT INTO hasil_perhitungan (user_id, berat_badan, tinggi_badan, usia, aktivitas_fisik, bmr, tee, protein, lemak, karbohidrat) 
+$sql = "INSERT INTO hasil_perhitungan (user_id, bb, tb, usia, aktivitas_fisik, bmr, tee, protein, lemak, karbohidrat) 
             VALUES ('$user_id', '$berat', '$tinggi', '$usia', '$aktivitas_fisik', '$bmr', '$tee', '$protein', '$lemak', '$karbohidrat')";
     
     // Eksekusi kueri SQL
     if ($conn->query($sql) === TRUE) {
-        echo "Hasil perhitungan berhasil disimpan.";
+        
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
@@ -81,9 +81,9 @@ $sql = "INSERT INTO hasil_perhitungan (user_id, berat_badan, tinggi_badan, usia,
         /* Font Roboto */
         body {
             font-family: 'Roboto', sans-serif;
-            background-color: #f8f9fa; /* Ganti warna latar belakang */
-            padding-top: 20px; /* Beri sedikit padding di atas */
+            background-color: #ffffff; /* Ubah warna latar belakang menjadi putih */
         }
+
 
         /* Container untuk hasil */
         .result-container {
@@ -97,6 +97,7 @@ $sql = "INSERT INTO hasil_perhitungan (user_id, berat_badan, tinggi_badan, usia,
         .recommendation-container {
             margin-top: 20px; /* Beri jarak atas */
         }
+
         .img-menu {
     max-width: 150px; /* Atur lebar maksimum gambar */
     height: auto; /* Biarkan tinggi gambar menyesuaikan proporsi */
@@ -117,6 +118,9 @@ $sql = "INSERT INTO hasil_perhitungan (user_id, berat_badan, tinggi_badan, usia,
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="cekkg.php">Kembali</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="dashboard.php">Dashboard</a>
                 </li>
             </ul>
         </div>

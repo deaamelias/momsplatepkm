@@ -31,7 +31,7 @@ $user_id = $_SESSION['user_id'];
         body {
             font-family: 'Roboto', sans-serif;
             background-color: #f8f9fa; /* Ganti warna latar belakang */
-            padding-top: 20px; /* Beri sedikit padding di atas */
+            /* Beri sedikit padding di atas */
         }
 
         /* Container untuk hasil */
@@ -62,6 +62,9 @@ $user_id = $_SESSION['user_id'];
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="cekgizi.php">Kembali</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="dashboard.php">Dashboard</a>
                 </li>
             </ul>
         </div>
