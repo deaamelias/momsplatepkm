@@ -1,60 +1,20 @@
 <?php
-session_start(); // Mulai sesi
+// Ambil ID user dari sesi
+session_start();
 include 'koneksi.php';
 // Periksa apakah pengguna sudah login atau belum
-if(isset($_SESSION['id'])) {
-    // Jika sudah login, ambil user_id dari sesi
-    // Setelah proses login berhasil, simpan ID pengguna ke dalam sesi
-$_SESSION['id'] = $user_id; // $user_id adalah ID pengguna yang telah berhasil diautentikasi
-
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    // Periksa koneksi
-    if ($conn->connect_error) {
-        die("Koneksi gagal: " . $conn->connect_error);
-    }
-
-    // Ambil data berat dan tinggi badan dari formulir
-    $berat = $_POST['berat'];
-    $tinggi = $_POST['tinggi'];
-
-    // Hitung indeks massa tubuh (IMT)
-    $tinggi_meter = $tinggi / 100;
-    $imt = $berat / ($tinggi_meter * $tinggi_meter);
-
-    // Tentukan status gizi berdasarkan IMT
-    if ($imt < 18.5) {
-        $status = "Berat badan kurang";
-        $rekomendasi = "Menu A";
-    } elseif ($imt >= 18.5 && $imt < 24.9) {
-        $status = "Berat badan normal";
-        $rekomendasi = "Menu B";
-    } elseif ($imt >= 24.9 && $imt < 29.9) {
-        $status = "Berat badan berlebih";
-        $rekomendasi = "Menu C";
-    } else {
-        $status = "Obesitas";
-        $rekomendasi = "Menu D";
-    }
-
-    // Buat kueri SQL untuk memasukkan data ke dalam tabel status_gizi
-    $sql = "INSERT INTO status_gizi (user_id, berat_badan, tinggi_badan, status_gizi) VALUES ('$user_id', '$berat', '$tinggi', '$status')";
-
-    // Eksekusi kueri SQL
-    if ($conn->query($sql) === TRUE) {
-        echo "Hasil perhitungan status gizi berhasil disimpan ke dalam database.";
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
-    }
-
-    // Tutup koneksi ke database
-    $conn->close();
-} else {
-    // Jika pengguna belum login, arahkan kembali ke halaman login atau lakukan tindakan yang sesuai
-    header("Location: index.php");
-    exit;
+if (!isset($_SESSION['user_id'])) {
+    // Jika belum login, redirect ke halaman login
+    header('Location: index.php');
+    exit();
 }
+
+// Ambil ID user dari sesi
+$user_id = $_SESSION['user_id'];
+
+// Sekarang Anda dapat menggunakan $user_id untuk mengakses data yang terkait dengan pengguna tersebut
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -116,74 +76,103 @@ $_SESSION['id'] = $user_id; // $user_id adalah ID pengguna yang telah berhasil d
                 <h3 class="text-center mb-4">Hasil Perhitungan Status Gizi</h3>
                 <?php
                 // Ambil data berat dan tinggi badan dari formulir
+                // Periksa apakah data dari formulir sudah tersedia
+                if (isset($_POST['berat']) && isset($_POST['tinggi'])) {
+                    $berat = $_POST['berat'];
+                    $tinggi = $_POST['tinggi'];
 
-                // Tampilkan hasil perhitungan
-                echo "<p><strong>Berat Badan:</strong> $berat kg</p>";
+                    // Hitung indeks massa tubuh (IMT)
+                    $tinggi_meter = $tinggi / 100;
+                    $imt = $berat / ($tinggi_meter * $tinggi_meter);
+
+                    // Tentukan status gizi berdasarkan IMT
+                    if ($imt < 18.5) {
+                        $status = "Berat badan kurang";
+                        $rekomendasi = "Menu A";
+                    } elseif ($imt >= 18.5 && $imt < 24.9) {
+                        $status = "Berat badan normal";
+                        $rekomendasi = "Menu B";
+                    } elseif ($imt >= 24.9 && $imt < 29.9) {
+                        $status = "Berat badan berlebih";
+                        $rekomendasi = "Menu C";
+                    } else {
+                        $status = "Obesitas";
+                        $rekomendasi = "Menu D";
+                    }
+
+                    // Buat kueri SQL untuk memasukkan data ke dalam tabel status_gizi
+                    $sql = "INSERT INTO status_gizi (user_id, berat_badan, tinggi_badan, status_gizi) VALUES ('$user_id', '$berat', '$tinggi', '$status')";
+
+                    // Eksekusi kueri SQL
+                    if ($conn->query($sql) === TRUE) {
+                        echo "<p><strong>Berat Badan:</strong> $berat kg</p>";
                 echo "<p><strong>Tinggi Badan:</strong> $tinggi cm</p>";
                 echo "<p><strong>Indeks Massa Tubuh (IMT):</strong> " . number_format($imt, 2) . "</p>";
                 echo "<p><strong>Status Gizi:</strong> <span style='color: green;'>$status</span></p>";
-
-
+                    } else {
+                        echo "Error: " . $sql . "<br>" . $conn->error;
+                    }
+                } else {
+                    echo "Data berat dan tinggi badan belum tersedia.";
+                }
                 ?>
             </div>
 
             <!-- Container untuk rekomendasi makanan -->
             <div class="recommendation-container" style="margin-top: 50px;">
-    <h4 class="text-center mb-3">Rekomendasi Makanan</h4>
-    <?php
-    switch ($rekomendasi) {
-        case "Menu A":
-            echo '
-            <div class="card mb-3">
-                <img src="salad.png" class="card-img-top" alt="Menu A">
-                <div class="card-body">
-                    <h5 class="card-title">Menu A</h5>
-                    <p class="card-text">Rekomendasi makanan untuk berat badan kurang:</p>
-                    <ul class="list-unstyled">
-                        <li>Makanan A1</li>
-                        <li>Makanan A2</li>
-                        <li>Makanan A3</li>
-                    </ul>
-                </div>
-            </div>';
-            break;
-        case "Menu B":
-            echo '
-            <div class="card mb-3">
-                <img src="salad.png" class="card-img-top" alt="Menu B">
-                <div class="card-body">
-                    <h5 class="card-title">Menu B</h5>
-                    <p class="card-text">Rekomendasi makanan untuk berat badan normal:</p>
-                    <ul class="list-unstyled">
-                        <li>Makanan B1</li>
-                        <li>Makanan B2</li>
-                        <li>Makanan B3</li>
-                    </ul>
-                </div>
-            </div>';
-            break;
-        case "Menu C":
-            echo '
-            <div class="card mb-3">
-                <img src="salad.png" class="card-img-top" alt="Menu C">
-                <div class="card-body">
-                    <h5 class="card-title">Menu C</h5>
-                    <p class="card-text">Rekomendasi makanan untuk berat badan berlebih:</p>
-                    <ul class="list-unstyled">
-                        <li>Makanan C1</li>
-                        <li>Makanan C2</li>
-                        <li>Makanan C3</li>
-                    </ul>
-                </div>
-            </div>';
-            break;
-        default:
-            echo "<p class='text-center'>Tidak ada rekomendasi makanan untuk status gizi ini.</p>";
-    }
-    ?>
-</div>
-
-
+                <h4 class="text-center mb-3">Rekomendasi Makanan</h4>
+                <?php
+                switch ($rekomendasi) {
+                    case "Menu A":
+                        echo '
+                        <div class="card mb-3">
+                            <img src="salad.png" class="card-img-top" alt="Menu A">
+                            <div class="card-body">
+                                <h5 class="card-title">Menu A</h5>
+                                <p class="card-text">Rekomendasi makanan untuk berat badan kurang:</p>
+                                <ul class="list-unstyled">
+                                    <li>Makanan A1</li>
+                                    <li>Makanan A2</li>
+                                    <li>Makanan A3</li>
+                                </ul>
+                            </div>
+                        </div>';
+                        break;
+                    case "Menu B":
+                        echo '
+                        <div class="card mb-3">
+                            <img src="salad.png" class="card-img-top" alt="Menu B">
+                            <div class="card-body">
+                                <h5 class="card-title">Menu B</h5>
+                                <p class="card-text">Rekomendasi makanan untuk berat badan normal:</p>
+                                <ul class="list-unstyled">
+                                    <li>Makanan B1</li>
+                                    <li>Makanan B2</li>
+                                    <li>Makanan B3</li>
+                                </ul>
+                            </div>
+                        </div>';
+                        break;
+                    case "Menu C":
+                        echo '
+                        <div class="card mb-3">
+                            <img src="salad.png" class="card-img-top" alt="Menu C">
+                            <div class="card-body">
+                                <h5 class="card-title">Menu C</h5>
+                                <p class="card-text">Rekomendasi makanan untuk berat badan berlebih:</p>
+                                <ul class="list-unstyled">
+                                    <li>Makanan C1</li>
+                                    <li>Makanan C2</li>
+                                    <li>Makanan C3</li>
+                                </ul>
+                            </div>
+                        </div>';
+                        break;
+                    default:
+                        echo "<p class='text-center'>Tidak ada rekomendasi makanan untuk status gizi ini.</p>";
+                }
+                ?>
+            </div>
         </div>
     </div>
 </div>
