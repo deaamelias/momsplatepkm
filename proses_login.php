@@ -22,12 +22,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Jika data ditemukan, ambil informasi pengguna
         $user = $result->fetch_assoc();
 
-        // Set session untuk username
-        // Jika data ditemukan, ambil informasi pengguna
-        $user = $result->fetch_assoc();
-
-        // Set session untuk username
         $_SESSION['username'] = $username;
+    $_SESSION['user_id'] = $user['id'];
+
 
         // Redirect berdasarkan peran (role) pengguna
         if ($user['role'] === 'admin') {
@@ -40,16 +37,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit();
         }
 
-        // Redirect berdasarkan peran (role) pengguna
-        if ($user['role'] === 'admin') {
-            // Jika peran pengguna adalah admin, redirect ke admin.php
-            header("Location: admin.php");
-            exit();
-        } else {
-            // Jika peran pengguna adalah user, redirect ke dashboard.php
-            header("Location: dashboard.php");
-            exit();
-        }
     } else {
         // Jika data tidak ditemukan, set pesan kesalahan
         $_SESSION['login_error'] = "Username atau password salah.";
