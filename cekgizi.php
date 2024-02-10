@@ -1,3 +1,20 @@
+<?php
+// Ambil ID user dari sesi
+session_start();
+
+// Periksa apakah pengguna sudah login atau belum
+if (!isset($_SESSION['user_id'])) {
+    // Jika belum login, redirect ke halaman login
+    header('Location: index.php');
+    exit();
+}
+
+// Ambil ID user dari sesi
+$user_id = $_SESSION['user_id'];
+
+// Sekarang Anda dapat menggunakan $user_id untuk mengakses data yang terkait dengan pengguna tersebut
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

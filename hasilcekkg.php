@@ -3,23 +3,15 @@
 session_start(); // Mulai sesi
 include 'koneksi.php';
 // Periksa apakah pengguna sudah login atau belum
-if(isset($_SESSION['id'])) {
+if(isset($_SESSION['user_id'])) {
     // Jika sudah login, ambil user_id dari sesi
-    $user_id = $_SESSION['id'];
+    $user_id = $_SESSION['user_id'];
     
     // Ambil data dari formulir
     $berat = $_POST['berat'];
     $tinggi = $_POST['tinggi'];
     $usia = $_POST['usia'];
-    $jenis_kelamin = $_POST['jenis_kelamin'];
     $aktivitas_fisik = $_POST['aktivitas'];
-
-// Ambil data dari formulir
-$berat = $_POST['berat'];
-$tinggi = $_POST['tinggi'];
-$usia = $_POST['usia'];
-$jenis_kelamin = $_POST['jenis_kelamin'];
-
 // Hitung BMR (Basal Metabolic Rate) untuk wanita hamil
 // Berat badan saat hamil bisa digunakan untuk perhitungan
 $bmr = (655.10 + (9.56 * $berat) + (1.85 * $tinggi) - (4.68 * $usia));
@@ -57,8 +49,8 @@ $lemak = $tee * 0.25; // Misalnya menggunakan 25% dari total kalori, dan 1 gram 
 // Hitung Kebutuhan Karbohidrat (gram/hari)
 $karbohidrat = $tee * 0.6; // Sisanya dari total kalori
 
-$sql = "INSERT INTO hasil_perhitungan (user_id, berat_badan, tinggi_badan, usia, jenis_kelamin, aktivitas_fisik) 
-            VALUES ('$user_id', '$berat', '$tinggi', '$usia', '$jenis_kelamin', '$aktivitas_fisik')";
+$sql = "INSERT INTO hasil_perhitungan (user_id, berat_badan, tinggi_badan, usia, aktivitas_fisik, bmr, tee, protein, lemak, karbohidrat) 
+            VALUES ('$user_id', '$berat', '$tinggi', '$usia', '$aktivitas_fisik', '$bmr', '$tee', '$protein', '$lemak', '$karbohidrat')";
     
     // Eksekusi kueri SQL
     if ($conn->query($sql) === TRUE) {
