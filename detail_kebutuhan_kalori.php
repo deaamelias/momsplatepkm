@@ -2,6 +2,9 @@
 // Mulai session
 session_start();
 
+// Include file koneksi ke database
+include 'koneksi.php';
+
 // Periksa apakah pengguna telah login sebagai admin
 if (!isset($_SESSION['username']) || $_SESSION['username'] !== 'admin') {
     // Jika tidak, redirect ke halaman login
@@ -9,21 +12,19 @@ if (!isset($_SESSION['username']) || $_SESSION['username'] !== 'admin') {
     exit();
 }
 
-// Include file koneksi ke database
-include 'koneksi.php';
-
-$query = "SELECT * FROM users WHERE role = 'user'";
-$result = $conn->query($query);
-
-// Mengecek apakah ada pengguna yang ditemukan
-if ($result->num_rows > 0) {
-    // Jika ada, simpan data pengguna ke dalam array
-    $users = $result->fetch_all(MYSQLI_ASSOC);
-} else {
-    // Jika tidak ada pengguna, inisialisasi array kosong
-    $users = [];
+// Periksa apakah parameter ID pengguna telah diterima dari URL
+if (!isset($_GET['id'])) {
+    // Jika tidak, redirect kembali ke halaman dashboard
+    header("Location: admin.php");
+    exit();
 }
 
+// Ambil ID pengguna dari parameter GET
+$user_id = $_GET['id'];
+
+// Query SQL untuk mengambil informasi riwayat kebutuhan kalori
+$query = "SELECT * FROM hasil_perhitungan WHERE user_id = $user_id ORDER BY tanggal DESC";
+$result = $conn->query($query);
 
 // Tutup koneksi database
 $conn->close();
@@ -138,7 +139,9 @@ $conn->close();
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
-                
+            <li class="nav-item">
+                    <a class="nav-link" href="admin.php">Dashboard</a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="logout.php">Logout</a>
                 </li>
@@ -147,46 +150,50 @@ $conn->close();
     </div>
 </nav>
 
-<section id="hero" class="py-5 text-center" style="margin-top: 10px;">
-<div class="container">
-    <h1 class="mb-4">Dashboard Admin</h1>
+<!-- Main Content -->
+<div class="container mt-5">
+    <h1 class="mb-4">Riwayat Kebutuhan Kalori</h1>
+
+    <!-- Tabel untuk menampilkan riwayat kebutuhan kalori -->
     <div class="table-responsive">
-        <table class="table table-bordered table-hover">
+        <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Username</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Role</th>
-                    <th scope="col">Action</th>
+                    <th>Tanggal</th>
+                    <th>Berat Badan</th>
+                    <th>Tinggi Badan</th>
+                    <th>Usia</th>
+                    <th>Aktivitas Fisik</th>
+                    <th>BMR</th>
+                    <th>TEE</th>
+                    <th>Protein</th>
+                    <th>Lemak</th>
+                    <th>Karbohidrat</th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($users as $index => $user): ?>
+                <?php while ($row = $result->fetch_assoc()) : ?>
                     <tr>
-                        <th scope="row"><?php echo $index + 1; ?></th>
-                        <td><?php echo $user['username']; ?></td>
-                        <td><?php echo $user['email']; ?></td>
-                        <td><?php echo $user['role']; ?></td>
-                        <td>
-                            <a href="detail_user.php?id=<?php echo $user['id']; ?>" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i> Detail</a>
-                            <a href="hapus_user.php?id=<?php echo $user['id']; ?>" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Hapus</a>
-                        </td>
+                        <td><?php echo $row['tanggal']; ?></td>
+                        <td><?php echo $row['bb']; ?></td>
+                        <td><?php echo $row['tb']; ?></td>
+                        <td><?php echo $row['usia']; ?></td>
+                        <td><?php echo $row['aktivitas_fisik']; ?></td>
+                        <td><?php echo $row['bmr']; ?></td>
+                        <td><?php echo $row['tee']; ?></td>
+                        <td><?php echo $row['protein']; ?></td>
+                        <td><?php echo $row['lemak']; ?></td>
+                        <td><?php echo $row['karbohidrat']; ?></td>
                     </tr>
-                <?php endforeach; ?>
+                <?php endwhile; ?>
             </tbody>
         </table>
     </div>
-</div>
-                </section>
-
-<footer class="py-4 bg-dark text-white text-center">
-    <div class="container">
-        &copy; 2024  Mom's Plate
+    <div>
+        <a href="detail_user.php?id=<?php echo $user_id; ?>" class="btn btn-primary">Kembali</a>
     </div>
-</footer>
+</div>
 
-<!-- Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
