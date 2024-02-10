@@ -10,10 +10,11 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 // Ambil ID user dari sesi
-$user_id = $_SESSION['id'];
+$user_id = $_SESSION['user_id'];
 
 // Sekarang Anda dapat menggunakan $user_id untuk mengakses data yang terkait dengan pengguna tersebut
 ?>
+
 
 
 <!DOCTYPE html>
