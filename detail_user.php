@@ -15,24 +15,24 @@ if (!isset($_SESSION['username']) || $_SESSION['username'] !== 'admin') {
 // Periksa apakah parameter ID pengguna telah diterima dari URL
 if (!isset($_GET['id'])) {
     // Jika tidak, redirect kembali ke halaman dashboard
-    header("Location: dashboard.php");
+    header("Location: admin.php");
     exit();
 }
 
 // Ambil ID pengguna dari parameter GET
 $user_id = $_GET['id'];
 
-// Query SQL untuk mengambil informasi detail pengguna berdasarkan ID
+// Query SQL untuk mengambil informasi detail pengguna dari tabel users
 $query = "SELECT * FROM users WHERE id = $user_id";
 $result = $conn->query($query);
 
 // Periksa apakah pengguna ditemukan
-if ($result->num_rows > 0) {
+if ($result->num_rows == 1) {
     // Jika ditemukan, ambil informasi pengguna
-    $user = $result->fetch_assoc();
+    $row = $result->fetch_assoc();
 } else {
     // Jika tidak ditemukan, redirect kembali ke halaman dashboard
-    header("Location: dashboard.php");
+    header("Location: admin.php");
     exit();
 }
 
@@ -52,34 +52,15 @@ $conn->close();
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <style>
-        /* Font Roboto */
-       
         body {
-
+            
+            background-color: #f8f9fa; /* Ubah warna latar belakang menjadi abu-abu muda */
             margin-bottom: 100px; /* Tambahkan margin bottom untuk memberi ruang bagi footer */
             position: relative; /* Atur posisi relatif untuk konten */
             min-height: 100vh; /* Atur tinggi minimum konten setara dengan tinggi viewport */
         }
 
-        /* Desain tambahan untuk card */
-        .card {
-            margin-top: 20px; /* Tambahkan jarak antara setiap card */
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Tambahkan bayangan untuk efek visual */
-            transition: 0.3s; /* Efek transisi smooth */
-            border: none; /* Hapus border default */
-            border-radius: 10px; /* Tambahkan sudut melengkung */
-        }
-
-        /* Desain tambahan untuk card saat hover */
-        .card:hover {
-            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-        }
-
-        /* Desain tambahan untuk gambar */
-        .img-menu {
-            width: 100px; /* Atur lebar gambar */
-            height: auto; /* Atur tinggi gambar otomatis sesuai lebar */
-        }
+        
 
         /* Atur posisi footer di bagian bawah halaman */
         footer {
@@ -92,54 +73,26 @@ $conn->close();
             text-align: center;
             padding: 10px 0;
         }
-       
 
-        /* Desain tambahan untuk section */
-        section {
-            padding: 60px 0;
-            overflow: hidden;
-            margin-bottom: 50px; /* Tambahkan jarak antara setiap bagian */
+
+        .card {
+            border-radius: 10px; /* Add border radius to card */
+            box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Add box shadow to card */
         }
-        
-
-        /* Desain tambahan untuk judul section */
-        section h2 {
-            font-size: 2.5rem;
-            margin-bottom: 30px;
-            color: #343a40;
+        .card-header {
+            background-color: #007bff; /* Set card header background color to primary color */
+            color: #fff; /* Set card header text color to white */
+            border-bottom: none; /* Remove bottom border from card header */
+            border-radius: 10px 10px 0 0; /* Add border radius to top corners */
         }
-
-        /* Desain tambahan untuk konten section */
-        section p {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: #666;
-        }
-
-        /* Desain tambahan untuk tombol */
         .btn-primary {
-            background-color: #007bff;
-            border-color: #007bff;
-            transition: all 0.3s ease-in-out;
+            background-color: #007bff; /* Set primary button background color */
+            border-color: #007bff; /* Set primary button border color */
         }
         .btn-primary:hover {
-            background-color: #0056b3;
-            border-color: #0056b3;
-        }
-
-        /* Desain tambahan untuk footer */
-        footer {
-            background-color: #343a40;
-            color: #fff;
-        }
-
-        /* Atur gambar menjadi lebih menarik */
-        .hero-image {
-            width: 90%;
-            max-width: 600px; /* Atur lebar maksimum gambar */
-        }
-
-        
+            background-color: #0056b3; /* Set primary button hover background color */
+            border-color: #0056b3; /* Set primary button hover border color */
+        }        
     </style>
 </head>
 <body>
@@ -156,33 +109,55 @@ $conn->close();
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
+                <li class="nav-item">
                     <a class="nav-link" href="admin.php">Kembali</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="logout.php">Logout</a>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
 
-<section id="hero" class="py-5 text-center" style="margin-top: 50px;">
-<div class="container mt-5">
-    <h1 class="mb-4">Detail Pengguna</h1>
-    <div class="card">
-        <div class="card-body">
-            <h5 class="card-title">Username: <?php echo $user['username']; ?></h5>
-            <p class="card-text">Email: <?php echo $user['email']; ?></p>
-            <p class="card-text">Role: <?php echo $user['role']; ?></p>
-            <!-- Tambahkan informasi pengguna lainnya sesuai kebutuhan -->
+<!-- Main Content -->
+<div class="container" style="margin-top: 40px;">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Informasi Pengguna</h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text"><strong>Username:</strong> <?php echo $row['username']; ?></p>
+                    <p class="card-text"><strong>Nama:</strong> <?php echo $row['nama']; ?></p>
+                    <p class="card-text"><strong>Telepon:</strong> <?php echo $row['telepon']; ?></p>
+                    <p class="card-text"><strong>Email:</strong> <?php echo $row['email']; ?></p>
+                    <p class="card-text"><strong>Role:</strong> <?php echo $row['role']; ?></p>
+                    <p class="card-text"><strong>Riwayat Penyakit:</strong> <?php echo $row['riwayat_penyakit']; ?></p>
+                    <p class="card-text"><strong>Riwayat Alergi:</strong> <?php echo $row['riwayat_alergi']; ?></p>
+                    <p class="card-text"><strong>Jumlah Anak:</strong> <?php echo $row['jumlah_anak']; ?></p>
+                    <p class="card-text"><strong>Paritas:</strong> <?php echo $row['paritas']; ?></p>
+                    <p class="card-text"><strong>Usia Kehamilan:</strong> <?php echo $row['usia_kehamilan']; ?></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-4">
+        <div class="col-md-8">
+            <div class="text-center">
+                <a href="detail_status_gizi.php?id=<?php echo $user_id; ?>" class="btn btn-primary mr-3">Lihat Status Gizi</a>
+                <a href="detail_kebutuhan_kalori.php?id=<?php echo $user_id; ?>" class="btn btn-primary">Lihat Kebutuhan Kalori</a>
+            </div>
         </div>
     </div>
 </div>
-    </section>
+
 <footer class="py-4 bg-dark text-white text-center">
     <div class="container">
         &copy; 2024  Mom's Plate
     </div>
 </footer>
-<!-- Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
