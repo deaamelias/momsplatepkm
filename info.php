@@ -1,7 +1,24 @@
 <?php
 // Include file koneksi ke database
 include 'koneksi.php';
-// Tutup koneksi database
+
+// Deklarasi variabel pencarian
+$search_query = '';
+
+// Periksa apakah ada permintaan pencarian dari pengguna
+if(isset($_GET['search'])) {
+    // Ambil nilai pencarian dari input form
+    $search_query = $_GET['search'];
+
+    // Modifikasi query SQL untuk mencocokkan judul atau deskripsi
+    $query = "SELECT * FROM diabetes_gestasional WHERE judul LIKE '%$search_query%' OR deskripsi LIKE '%$search_query%'";
+} else {
+    // Query SQL untuk mengambil semua informasi jika tidak ada pencarian
+    $query = "SELECT * FROM diabetes_gestasional";
+}
+
+// Eksekusi query
+$result = $conn->query($query);
 
 ?>
 
@@ -70,56 +87,45 @@ include 'koneksi.php';
     <section id="info" class="py-5">
         <div class="container">
             <div class="row">
-                <div class="col-md-12 mb-2 " >
-                    <form class="form-inline search-form justify-content-center col-md-12">
-                        <input class="form-control mr-sm-2 w-75" type="search" placeholder="Cari informasi..." aria-label="Search">
-                        <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
-                    </form>
-                </div>
+            <div class="col-md-12 mb-2">
+        <form class="form-inline search-form justify-content-center col-md-12" method="GET" action="">
+            <input class="form-control mr-sm-2 w-75" type="search" placeholder="Cari informasi..." aria-label="Search" name="search">
+            <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
                 
             
-                                <?php 
-                                // Query SQL untuk mengambil informasi dari tabel diabetes_gestasional
-                                $query = "SELECT * FROM diabetes_gestasional";
-                                $result = $conn->query($query);
-
-                                // Periksa apakah terdapat data yang ditemukan
-                                if ($result->num_rows > 0) {
-                                 // Loop melalui setiap baris data
-                                    while($row = $result->fetch_assoc()) {
-                                    // Tampilkan informasi dalam sebuah card
-                                     echo ' <div class="row mb-4">
-                                     <div class="col-md-12">
-                                               <div class="info-container">
-                                               <div class="info-content">
-                                                    <h3 class="mb-4">' . $row['judul'] . '</h3>
-                                                    <div class="float-left mr-4">
-                                                           <img src="' . $row['gambar'] . '" alt="' . $row['judul'] . '" class="info-img" style="max-width: 150px;">
-                                                        </div>
-                                                        <div class="info-text">
-                                                        <p>' . $row['deskripsi'] . '</p>
-                                                        <p>Informasi lebih lanjut mengenai diabetes bisa ditemukan <a href="informasi.php?id=' . $row['id'] . '">di sini</a>.</p>
-                                                        </div>
-                                                </div>
-                                                </div>
-                                            </div>
-                                         </div>
-                                     </div>';
-                                     }
-                                }  else {
-                                    echo "Tidak ada informasi yang tersedia.";
-                                }
-                                $conn->close();?>
+    <?php
+// Bagian PHP untuk menampilkan informasi hasil pencarian atau semua informasi jika tidak ada pencarian
+if ($result->num_rows > 0) {
+    // Tampilkan informasi dalam sebuah card
+    while($row = $result->fetch_assoc()) {
+        echo '<div class="col-md-12 mb-4">
+                <div class="info-container">
+                    <div class="info-content">
+                        <h3 class="mb-4">' . $row['judul'] . '</h3>
+                        <div class="float-left mr-4">
+                            <img src="' . $row['gambar'] . '" alt="' . $row['judul'] . '" class="info-img" style="max-width: 100px;">
+                        </div>
+                        <div class="info-text">
+                            <p>' . $row['deskripsi'] . '</p>
+                            <p>Informasi lebih lanjut mengenai diabetes bisa ditemukan <a href="informasi.php?id=' . $row['id'] . '">di sini</a>.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>';
+    }
+}  else {
+    echo "Tidak ada informasi yang tersedia.";
+}
+$conn->close();
+?>
             </div>
         </div>
         
     </section>
 
-    <footer class="py-4 bg-dark text-white text-center">
-        <div class="container">
-            &copy; 2024  Mom's Plate
-        </div>
-    </footer>
+    
 
     <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
