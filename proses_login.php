@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['login_error'] = "Username atau password salah.";
 
         // Redirect ke halaman login kembali
-        header("Location: index.php");
+        header("Location: login.php");
         exit();
     }
 }
