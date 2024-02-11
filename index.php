@@ -103,53 +103,14 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#articles">Artikel</a>
                 </li>
-                <!-- Form login -->
                 <li class="nav-item">
-                    <a class="nav-link" href="#" data-toggle="modal" data-target="#loginModal">Login</a>
+                    <a class="nav-link" href="login.php">Login</a>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
 
-
-
-<!-- Modal for Login -->
-<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="loginModalLabel">Login Mom's Plate</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form action="proses_login.php" method="post">
-                    <div class="form-group">
-                        <label for="inputUsername">Username</label>
-                        <input type="text" class="form-control" id="inputUsername" name="inputUsername" placeholder="Masukkan username Anda" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputPassword">Password</label>
-                        <input type="password" class="form-control" id="inputPassword" name="inputPassword" placeholder="Masukkan kata sandi Anda" required>
-                    </div>
-                    <div class="form-group form-check">
-                        <input type="checkbox" class="form-check-input" id="rememberMe" name="rememberMe">
-                        <label class="form-check-label" for="rememberMe">Ingat Kata Sandi</label>
-                    </div>
-                    <!-- Pesan kesalahan -->
-                    <?php if(isset($_SESSION['login_error'])): ?>
-                        <div class="alert alert-danger" role="alert">
-                            <?php echo $_SESSION['login_error']; ?>
-                        </div>
-                    <?php endif; ?>
-                    <button type="submit" class="btn btn-primary btn-block">Login</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 
 <!-- Hero Section -->
 <section id="hero" class="py-5" style="margin-top: 80px;">
