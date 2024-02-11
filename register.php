@@ -11,7 +11,7 @@
     <style>
         body {
             background-color: #f8f9fa;
-            padding-top: 80px;
+            
         }
         .form-container {
             background-color: #fff;
@@ -28,8 +28,26 @@
     </style>
 </head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow sticky-top">
+    <div class="container">
+        <a class="navbar-brand" href="#">
+            <img src="pregnant.png" alt="Logo" class="navbar-logo img-fluid mr-2" style="max-height: 40px;"> <!-- Menambahkan class "mr-2" untuk memberi jarak ke judul -->
+            <b>Mom's Plate</b>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.php">Dashboard</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 
-<section id="registration">
+<section id="registration" style="margin-top: 80px;">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-6">
@@ -102,6 +120,9 @@
 
                         <button type="submit" class="btn btn-primary btn-block">Daftar</button>
                     </form>
+                    <div class="text-center mt-3">
+        Sudah punya akun? <a href="login.php">Silakan Login</a>
+    </div>
                 </div>
             </div>
         </div>
