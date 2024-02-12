@@ -10,8 +10,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $telepon = $_POST['inputTelepon'];
     $password = hash('sha256', $_POST['inputPassword']); // Hashing password menggunakan SHA-256
     $role = 'user'; // Tentukan role pengguna
-    $riwayat_penyakit = $_POST['inputRiwayatPenyakit'];
-    $riwayat_alergi = $_POST['inputRiwayatAlergi'];
+    $riwayat_penyakit = isset($_POST['inputRiwayatPenyakit']) && !empty($_POST['inputRiwayatPenyakit']) ? $_POST['inputRiwayatPenyakit'] : '-';
+    $riwayat_alergi = isset($_POST['inputRiwayatAlergi']) && !empty($_POST['inputRiwayatAlergi']) ? $_POST['inputRiwayatAlergi'] : '-';
     $jumlah_anak = $_POST['inputJumlahAnak'];
     $usia_kehamilan = $_POST['inputUsiaKehamilan'];
    
@@ -43,7 +43,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 if ($register_stmt) {
                     // Bind parameter ke statement
                     $register_stmt->bind_param("ssssssssss", $username, $nama, $email, $telepon, $password, $riwayat_penyakit, $riwayat_alergi, $jumlah_anak, $usia_kehamilan, $role);
-                    
+                    $_SESSION['username'] = $username;
+                    $_SESSION['user_id'] = $register_stmt['id'];
+
                     // Eksekusi statement
                     if ($register_stmt->execute()) {
                         // Jika pendaftaran berhasil, langsung redirect ke dashboard.php
