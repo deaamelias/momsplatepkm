@@ -13,7 +13,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $riwayat_penyakit = $_POST['inputRiwayatPenyakit'];
     $riwayat_alergi = $_POST['inputRiwayatAlergi'];
     $jumlah_anak = $_POST['inputJumlahAnak'];
-    $paritas = $_POST['inputParitas'];
     $usia_kehamilan = $_POST['inputUsiaKehamilan'];
    
     // Query SQL untuk memeriksa apakah username sudah ada di database
@@ -36,14 +35,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             } else {
                 // Jika username belum ada, lanjutkan dengan proses pendaftaran
                 // Query SQL untuk menyimpan data pengguna ke database
-                $register_sql = "INSERT INTO users (username, nama, email, telepon, password, riwayat_penyakit, riwayat_alergi, jumlah_anak, paritas, usia_kehamilan, role) 
-                                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                $register_sql = "INSERT INTO users (username, nama, email, telepon, password, riwayat_penyakit, riwayat_alergi, jumlah_anak, usia_kehamilan, role) 
+                                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             
                 // Persiapkan statement
                 $register_stmt = $conn->prepare($register_sql);
                 if ($register_stmt) {
                     // Bind parameter ke statement
-                    $register_stmt->bind_param("sssssssssss", $username, $nama, $email, $telepon, $password, $riwayat_penyakit, $riwayat_alergi, $jumlah_anak, $paritas, $usia_kehamilan, $role);
+                    $register_stmt->bind_param("sssssssssss", $username, $nama, $email, $telepon, $password, $riwayat_penyakit, $riwayat_alergi, $jumlah_anak, $usia_kehamilan, $role);
                     
                     // Eksekusi statement
                     if ($register_stmt->execute()) {

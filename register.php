@@ -109,10 +109,6 @@
         <input type="number" class="form-control" id="inputJumlahAnak" name="inputJumlahAnak" placeholder="Jumlah anak yang dimiliki" min="0" required>
     </div>
     <div class="form-group">
-        <label for="inputParitas">Paritas</label>
-        <input type="text" class="form-control" id="inputParitas" name="inputParitas" placeholder="Paritas" required>
-    </div>
-    <div class="form-group">
         <label for="inputUsiaKehamilan">Usia Kehamilan (Bulan)</label>
         <input type="number" class="form-control" id="inputUsiaKehamilan" name="inputUsiaKehamilan" placeholder="Usia kehamilan Anda" min="1" max="12" required>
     </div>
