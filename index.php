@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Font Roboto -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <style>
         /* Font Roboto */
@@ -104,6 +106,9 @@
                     <a class="nav-link" href="#articles">Artikel</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="#contact">Contact</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="login.php">Login</a>
                 </li>
             </ul>
@@ -185,7 +190,13 @@
 <section id="articles" >
     <div class="container ">
         <h2 class="text-center animate__animated animate__zoomIn"><b><em>Artikel dan Informasi</em></b></h2>
+        <p>Pada tahun 2021, keluhan kesehatan terutama terkait penyakit tidak menular, dengan angka kematian mencapai 73%. Salah satu penyakit yang mencuat adalah diabetes melitus, dipicu oleh perubahan gaya hidup dan pola makan. Indonesia menempati peringkat ke-5 dengan jumlah kasus diabetes tertinggi di dunia, terutama di kota-kota besar seperti Jakarta dan Surabaya, di mana 10% penduduknya terkena diabetes. <br><br> Diabetes gestasional, khususnya pada ibu hamil, juga menjadi perhatian karena prevalensinya di Indonesia mencapai 1,9-3,6%.
+
+       Perubahan metabolisme selama kehamilan meningkatkan risiko diabetes gestasional, yang dapat dikendalikan melalui terapi diet berdasarkan pedoman gizi seimbang. Ibu hamil dengan obesitas memiliki risiko lebih tinggi terkena diabetes gestasional.  <br><br>Oleh karena itu, pola makan sehat yang mengikuti pedoman gizi seimbang sangat penting, dengan 10 pedoman termasuk konsumsi aneka ragam makanan, sayur, buah, dan lauk pauk berprotein tinggi, serta membatasi asupan makanan berlemak, asin, dan manis.
+
+Melalui pola makan yang sehat dan gizi seimbang, dapat membantu menurunkan risiko terkena diabetes, termasuk diabetes gestasional, serta menjaga kesehatan tubuh dan memperlancar proses pemulihan.</p><br><br>
         <div class="row">
+
             <?php
             include 'koneksi.php';
 
@@ -225,6 +236,31 @@ $conn->close();
         </div>
     </div>
 </section>
+
+<!-- Contact Section -->
+<section id="contact" class="py-12">
+    <div class="container">
+        <h2 class="text-center animate__animated animate__fadeInLeft"><b><em>Contact Us</em></b></h2>
+        <div class="row">
+            <div class="col-lg-12 animate__animated animate__fadeInLeft">
+                <div class="info-container">
+                    <div class="info-content">
+                        <h3>Contact Information</h3>
+                        <p>Jika Anda memiliki pertanyaan atau permintaan informasi, jangan ragu untuk menghubungi kami melalui email:</p>
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-envelope mr-2"></i>
+                            <p>momsplatepkm@gmail.com</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 animate__animated animate__fadeInRight">
+                <!-- You can add additional contact information or form here if needed -->
+            </div>
+        </div>
+    </div>
+</section>
+
 
 <!-- Footer -->
 <footer class="py-4 bg-dark text-white text-center">
