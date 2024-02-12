@@ -12,11 +12,12 @@ if(isset($_SESSION['user_id'])) {
     $tinggi = $_POST['tinggi'];
     $usia = $_POST['usia'];
     $trimester = $_POST['trimester'];
-    $aktivitas = $_POST['aktivitas'];
+    $aktivitas_fisik = $_POST['aktivitas'];
 // Hitung BMR (Basal Metabolic Rate) untuk wanita hamil
 // Berat badan saat hamil bisa digunakan untuk perhitungan
 $bmr = (655.10 + (9.56 * $berat) + (1.85 * $tinggi) - (4.68 * $usia));
 // Ambil data aktivitas dari formulir
+$aktivitas = $_POST['aktivitas'];
 switch ($aktivitas) {
     case 'tidur':
         $fa = 1.2;
