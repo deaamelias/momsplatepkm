@@ -24,8 +24,6 @@ if ($result->num_rows > 0) {
     $users = [];
 }
 
-
-// Tutup koneksi database
 $conn->close();
 ?>
 
@@ -49,9 +47,6 @@ $conn->close();
             min-height: 100vh; /* Atur tinggi minimum konten setara dengan tinggi viewport */
         }
 
-        
-
-        /* Atur posisi footer di bagian bawah halaman */
         footer {
             position: fixed;
             left: 0;
@@ -62,8 +57,6 @@ $conn->close();
             text-align: center;
             padding: 10px 0;
         }
-
-       
 
         .table {
             background-color: #fff; /* Table background color */
@@ -118,10 +111,7 @@ $conn->close();
         .btn-primary:hover,
         .btn-danger:hover {
             opacity: 0.85; /* Button hover opacity */
-        }
-
-
-        
+        } 
     </style>
 </head>
 <body>
@@ -154,7 +144,7 @@ $conn->close();
         <table class="table table-bordered table-hover">
             <thead>
                 <tr>
-                    <th scope="col">#</th>
+                    <th scope="col">No</th>
                     <th scope="col">Username</th>
                     <th scope="col">Email</th>
                     <th scope="col">Role</th>
