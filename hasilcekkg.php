@@ -199,7 +199,7 @@ $rekomendasi = rekomendasiMakanan($tee);
 </section>
 
 <!-- Container untuk rekomendasi makanan -->
-<section id="hero" class="py-5 text-center" style="margin-top: 20px;">
+<section id="hero" class="py-5 text-center">
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-lg-6">
