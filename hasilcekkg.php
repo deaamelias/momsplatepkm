@@ -15,8 +15,8 @@ if(isset($_SESSION['user_id'])) {
     $aktivitas_fisik = $_POST['aktivitas'];
     
     $bmr = (655.10 + (9.56 * $berat) + (1.85 * $tinggi) - (4.68 * $usia));
-// Ambil data aktivitas dari formulir
-$aktivitas = $_POST['aktivitas'];
+    
+    $aktivitas = $_POST['aktivitas'];
 switch ($aktivitas) {
     case 'tidur':
         $fa = 1.2;
