@@ -237,29 +237,29 @@ $conn->close();
     </div>
 </section>
 
-<!-- Contact Section -->
-<section id="contact" class="py-12">
+<section id="contact" class="py-5 bg-light">
     <div class="container">
-        <h2 class="text-center animate__animated animate__fadeInLeft"><b><em>Contact Us</em></b></h2>
         <div class="row">
-            <div class="col-lg-12 animate__animated animate__fadeInLeft">
-                <div class="info-container">
-                    <div class="info-content">
-                        <h3>Contact Information</h3>
-                        <p>Jika Anda memiliki pertanyaan atau permintaan informasi, jangan ragu untuk menghubungi kami melalui email:</p>
-                        <div class="d-flex align-items-center">
-                            <i class="fas fa-envelope mr-2"></i>
-                            <p>momsplatepkm@gmail.com</p>
-                        </div>
+            <div class="col-lg-12 text-center mb-4">
+                <h2 class="section-title mb-3"><b><em>Contact Us</b></em></h2>
+                <p class="section-subtitle">Punya pertanyaan atau butuh informasi lebih lanjut? Jangan sungkan untuk menghubungi kami.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 mb-4">
+                <div class="contact-info p-4 bg-white shadow-sm rounded">
+                    <h3 class="info-title mb-3">Contact Information</h3>
+                    <p class="mb-4">Jika Anda memiliki pertanyaan atau permintaan informasi, jangan ragu untuk menghubungi kami melalui email:</p>
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-envelope fa-lg mr-2"></i>
+                        <p class="mb-0">momsplatepkm@gmail.com</p>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-6 animate__animated animate__fadeInRight">
-                <!-- You can add additional contact information or form here if needed -->
             </div>
         </div>
     </div>
 </section>
+
 
 
 <!-- Footer -->
