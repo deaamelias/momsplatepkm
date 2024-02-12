@@ -53,7 +53,7 @@
             <div class="col-lg-6">
                 <div class="form-container">
                     <h2 class="text-center form-title">Pendaftaran Akun</h2>
-                    <form action="proses_pendaftaran.php" method="post">
+                    <form action="proses_pendaftaran.php" method="post" id="registrationForm">
                     <div class="form-group">
     <label for="inputUsername">Username</label>
     <input type="text" class="form-control" id="inputUsername" name="inputUsername" placeholder="Masukkan username" required minlength="3">
@@ -71,29 +71,30 @@
     <input type="tel" class="form-control" id="inputTelepon" name="inputTelepon" placeholder="Masukkan nomor telepon Anda" required>
 </div>
 <div class="form-group">
-    <label for="inputPassword">Password</label>
-    <div class="input-group">
-        <input type="password" class="form-control" id="inputPassword" name="inputPassword" placeholder="Buat kata sandi" required minlength="8">
-        <div class="input-group-append">
-            <button class="btn btn-outline-secondary" type="button" id="togglePassword">
-                <i class="fas fa-eye-slash"></i>
-            </button>
-        </div>
-    </div>
-    <small id="passwordHelp" class="form-text text-muted">Password harus memiliki minimal 8 karakter.</small>
-</div>
-<div class="form-group">
-    <label for="inputConfirmPassword">Konfirmasi Password</label>
-    <div class="input-group">
-        <input type="password" class="form-control" id="inputConfirmPassword" name="inputConfirmPassword" placeholder="Ulangi kata sandi" required minlength="8">
-        <div class="input-group-append">
-            <button class="btn btn-outline-secondary" type="button" id="togglePassword">
-                <i class="fas fa-eye-slash"></i>
-            </button>
-        </div>
-    </div>
-    <small id="passwordHelp" class="form-text text-muted">Password harus memiliki minimal 8 karakter.</small>
-</div>
+                            <label for="inputPassword">Password</label>
+                            <div class="input-group">
+                                <input type="password" class="form-control" id="inputPassword" name="inputPassword" placeholder="Buat kata sandi" required minlength="8">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                        <i class="fas fa-eye-slash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <small id="passwordHelp" class="form-text text-muted">Password harus memiliki minimal 8 karakter.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputConfirmPassword">Konfirmasi Password</label>
+                            <div class="input-group">
+                                <input type="password" class="form-control" id="inputConfirmPassword" name="inputConfirmPassword" placeholder="Ulangi kata sandi" required minlength="8">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" type="button" id="toggleConfirmPassword">
+                                        <i class="fas fa-eye-slash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <small id="confirmPasswordHelp" class="form-text text-muted">Password harus memiliki minimal 8 karakter.</small>
+                            <div class="invalid-feedback">Konfirmasi password tidak cocok.</div>
+                        </div>
 <hr>
     <h4 class="mb-3">Data Diri</h4>
     <div class="form-group">
@@ -145,6 +146,21 @@
         // Mengubah ikon sesuai dengan tipe input
         this.querySelector('i').classList.toggle('fa-eye-slash');
         this.querySelector('i').classList.toggle('fa-eye');
+    });
+
+    // Memeriksa apakah password dan konfirmasi password cocok saat form disubmit
+    document.getElementById('registrationForm').addEventListener('submit', function(event) {
+        const password = document.getElementById('inputPassword').value;
+        const confirmPassword = document.getElementById('inputConfirmPassword').value;
+
+        if (password !== confirmPassword) {
+            // Password tidak cocok, beri tahu pengguna
+            document.getElementById('inputConfirmPassword').classList.add('is-invalid');
+            event.preventDefault(); // Mencegah pengiriman formulir
+        } else {
+            // Password cocok, hapus pesan kesalahan (jika ada)
+            document.getElementById('inputConfirmPassword').classList.remove('is-invalid');
+        }
     });
 </script>
 
