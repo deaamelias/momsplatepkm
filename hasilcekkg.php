@@ -11,13 +11,12 @@ if(isset($_SESSION['user_id'])) {
     $berat = $_POST['berat'];
     $tinggi = $_POST['tinggi'];
     $usia = $_POST['usia'];
-    $aktivitas_fisik = $_POST['aktivitas'];
+    $trimester = $_POST['trimester'];
+    $aktivitas = $_POST['aktivitas'];
 // Hitung BMR (Basal Metabolic Rate) untuk wanita hamil
 // Berat badan saat hamil bisa digunakan untuk perhitungan
 $bmr = (655.10 + (9.56 * $berat) + (1.85 * $tinggi) - (4.68 * $usia));
-
-
-$aktivitas = $_POST['aktivitas']; // Ambil data aktivitas dari formulir
+// Ambil data aktivitas dari formulir
 switch ($aktivitas) {
     case 'tidur':
         $fa = 1.2;
@@ -35,22 +34,49 @@ switch ($aktivitas) {
         $fa = 1.5; // Default FA jika tidak ada pilihan yang dipilih
 }
 
+switch ($trimester) {
+    case 'trimester1':
+        $energi_plus = 180;
+        $protein_plus = 1;
+        $lemak_plus = 2.3;
+        $karbohidrat_plus = 25;
+        break;
+    case 'trimester2':
+        $energi_plus = 300;
+        $protein_plus = 10;
+        $lemak_plus = 2.3;
+        $karbohidrat_plus = 40;
+        break;
+    case 'trimester3':
+        $energi_plus = 300;
+        $protein_plus = 30;
+        $lemak_plus = 2.3;
+        $karbohidrat_plus = 40;
+        break;
+    default:
+        // Default trimester 1 jika tidak ada pilihan yang dipilih
+        $energi_plus = 180;
+        $protein_plus = 1;
+        $lemak_plus = 2.3;
+        $karbohidrat_plus = 25;
+}
+
 $fs = 1.1; // Default FS jika tidak ada pilihan yang dipilih
 
 // Hitung TEE (Total Energy Expenditure) dengan memperhitungkan FA dan FS
-$tee = $bmr * $fa * $fs;
+$tee = $bmr  * $fa * $fs + $energi_plus;
 
 // Hitung Kebutuhan Protein (gram/hari)
-$protein = $tee * 0.15; // Misalnya menggunakan 1.1 gram protein per kilogram berat badan untuk ibu hamil
+$protein = ($tee * 0.15)/9 + $protein_plus; // Misalnya menggunakan 1.1 gram protein per kilogram berat badan untuk ibu hamil
 
 // Hitung Kebutuhan Lemak (gram/hari)
-$lemak = $tee * 0.25; // Misalnya menggunakan 25% dari total kalori, dan 1 gram lemak = 9 kalori
+$lemak = ($tee * 0.25)/9 + $lemak_plus; // Misalnya menggunakan 25% dari total kalori, dan 1 gram lemak = 9 kalori
 
 // Hitung Kebutuhan Karbohidrat (gram/hari)
-$karbohidrat = $tee * 0.6; // Sisanya dari total kalori
+$karbohidrat = ($tee * 0.6)/9 + $karbohidrat_plus; // Sisanya dari total kalori
 
-$sql = "INSERT INTO hasil_perhitungan (user_id, bb, tb, usia, aktivitas_fisik, bmr, tee, protein, lemak, karbohidrat) 
-            VALUES ('$user_id', '$berat', '$tinggi', '$usia', '$aktivitas_fisik', '$bmr', '$tee', '$protein', '$lemak', '$karbohidrat')";
+$sql = "INSERT INTO hasil_perhitungan (user_id, bb, tb, usia, aktivitas_fisik, bmr, tee, protein, lemak, karbohidrat, trimester) 
+            VALUES ('$user_id', '$berat', '$tinggi', '$usia', '$aktivitas_fisik', '$bmr', '$tee', '$protein', '$lemak', '$karbohidrat', '$trimester')";
     
     // Eksekusi kueri SQL
     if ($conn->query($sql) === TRUE) {

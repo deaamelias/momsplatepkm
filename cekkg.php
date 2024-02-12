@@ -111,6 +111,14 @@ $user_id = $_SESSION['user_id'];
         <input type="number" class="form-control" id="usia" name="usia" required>
     </div>
     <div class="form-group">
+        <label for="trimester">Trimester</label>
+        <select class="form-control" id="trimester" name="trimester" required>
+            <option value="trimester1">Trimester 1</option>
+            <option value="trimester2">Trimester 2</option>
+            <option value="trimester3">Trimester 3</option>
+        </select>
+    </div>
+    <div class="form-group">
         <label for="aktivitas">Aktivitas Fisik</label>
         <select class="form-control" id="aktivitas" name="aktivitas" required>
         <option value="tidur">Hanya di tempat tidur</option>
