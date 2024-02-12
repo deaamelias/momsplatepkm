@@ -120,18 +120,18 @@ $sql = "INSERT INTO hasil_perhitungan (user_id, bb, tb, usia, aktivitas_fisik, b
 
         /* Container untuk rekomendasi makanan */
         /* Gaya untuk gambar menu */
-.img-menu {
-    max-width: 200px; /* Atur lebar maksimum gambar */
-    height: auto; /* Biarkan tinggi gambar menyesuaikan proporsi */
-    margin: 0 auto; /* Pusatkan gambar */
-}
+        .img-menu {
+            max-width: 200px; /* Atur lebar maksimum gambar */
+            height: auto; /* Biarkan tinggi gambar menyesuaikan proporsi */
+            margin: 0 auto; /* Pusatkan gambar */
+        }
 
-/* Gaya untuk kontainer rekomendasi makanan */
-.recommendation-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
+        /* Gaya untuk kontainer rekomendasi makanan */
+        .recommendation-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
 
     </style>
 </head>
@@ -189,10 +189,14 @@ function rekomendasiMakanan($tee) {
 // Mendapatkan rekomendasi makanan berdasarkan TEE
 $rekomendasi = rekomendasiMakanan($tee);
 ?>
+        </div>
+    </div>
+</div>
+</section>
 
 <!-- Container untuk rekomendasi makanan -->
 <div class="recommendation-container" style="margin-top: 50px;">
-    <h4 class="text-center mb-3">Rekomendasi Makanan</h4>
+        <h4 class="text-center mb-3">Rekomendasi Makanan</h4>
     <?php
     switch ($rekomendasi) {
         case "Menu A":
@@ -231,10 +235,6 @@ $rekomendasi = rekomendasiMakanan($tee);
     ?>
 </div>
 
-        </div>
-    </div>
-</div>
-</section>
 <footer class="py-4 bg-dark text-white text-center">
     <div class="container">
         &copy; 2024  Mom's Plate
