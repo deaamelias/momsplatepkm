@@ -131,10 +131,6 @@ $conn->close();
             <input type="number" class="form-control" id="jumlah_anak" value="<?php echo $user['jumlah_anak']; ?>" readonly>
         </div>
         <div class="form-group">
-            <label for="paritas">Paritas</label>
-            <input type="text" class="form-control" id="paritas" value="<?php echo $user['paritas']; ?>" readonly>
-        </div>
-        <div class="form-group">
             <label for="usia_kehamilan">Usia Kehamilan</label>
             <input type="text" class="form-control" id="usia_kehamilan" value="<?php echo $user['usia_kehamilan']; ?>" readonly>
         </div>

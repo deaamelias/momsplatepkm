@@ -36,11 +36,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $new_riwayat_penyakit = $_POST['new_riwayat_penyakit'];
     $new_riwayat_alergi = $_POST['new_riwayat_alergi'];
     $new_jumlah_anak = $_POST['new_jumlah_anak'];
-    $new_paritas = $_POST['new_paritas'];
     $new_usia_kehamilan = $_POST['new_usia_kehamilan'];
     
     // Query SQL untuk mengupdate informasi pengguna kecuali username
-    $update_query = "UPDATE users SET email = '$new_email', telepon = '$new_telepon', riwayat_penyakit = '$new_riwayat_penyakit', riwayat_alergi = '$new_riwayat_alergi', jumlah_anak = '$new_jumlah_anak', paritas = '$new_paritas', usia_kehamilan = '$new_usia_kehamilan' WHERE username = '$username'";
+    $update_query = "UPDATE users SET email = '$new_email', telepon = '$new_telepon', riwayat_penyakit = '$new_riwayat_penyakit', riwayat_alergi = '$new_riwayat_alergi', jumlah_anak = '$new_jumlah_anak', usia_kehamilan = '$new_usia_kehamilan' WHERE username = '$username'";
     
     // Lakukan update pada database
     if ($conn->query($update_query) === TRUE) {
@@ -151,15 +150,11 @@ $conn->close();
                 </div>
                 <div class="form-group">
                     <label for="jumlah_anak">Jumlah Anak</label>
-                    <input type="number" class="form-control" id="jumlah_anak" name="new_jumlah_anak" value="<?php echo $user['jumlah_anak']; ?>">
-                </div>
-                <div class="form-group">
-                    <label for="paritas">Paritas</label>
-                    <input type="text" class="form-control" id="paritas" name="new_paritas" value="<?php echo $user['paritas']; ?>">
+                    <input type="number" class="form-control" id="jumlah_anak" name="new_jumlah_anak" value="<?php echo $user['jumlah_anak']; ?>" min="0">
                 </div>
                 <div class="form-group">
                     <label for="usia_kehamilan">Usia Kehamilan</label>
-                    <input type="text" class="form-control" id="usia_kehamilan" name="new_usia_kehamilan" value="<?php echo $user['usia_kehamilan']; ?>">
+                    <input type="number" class="form-control" id="usia_kehamilan" name="new_usia_kehamilan" value="<?php echo $user['usia_kehamilan']; ?>" min="1" max="12">
                 </div>
                 <button type="submit" class="btn btn-primary">Update</button>
                 <a href="view_profile.php" class="btn btn-secondary">Batal</a>
