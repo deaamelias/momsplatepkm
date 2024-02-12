@@ -116,6 +116,7 @@ $sql = "INSERT INTO hasil_perhitungan (user_id, bb, tb, usia, aktivitas_fisik, b
             border-radius: 10px; /* Agar tampilan lebih rapi */
             padding: 20px; /* Beri padding */
             box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1); /* Efek bayangan untuk kesan lebih tiga dimensi */
+        
         }
 
         /* Container untuk rekomendasi makanan */
@@ -162,7 +163,8 @@ $sql = "INSERT INTO hasil_perhitungan (user_id, bb, tb, usia, aktivitas_fisik, b
     </div>
 </nav>
 
-<section id="hero" class="py-5 text-center" style="margin-top: 50px;">
+<section id="hero" class="pb-5 text-center" style="margin-top: 50px;">
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-lg-6">
@@ -199,53 +201,54 @@ $rekomendasi = rekomendasiMakanan($tee);
 </section>
 
 <!-- Container untuk rekomendasi makanan -->
-<section id="hero" class="py-5 text-center">
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-lg-6">
-<div class="recommendation-container">
-        <h4 class="text-center mb-3">Rekomendasi Makanan</h4>
-    <?php
-    switch ($rekomendasi) {
-        case "Menu A":
-            echo '
-            <div class="mb-3 text-center">
-                <img src="salad.png" class="card-img-top img-menu" alt="Menu A">
-                <div class="card-body">
-                    <h5 class="card-title">Menu A</h5>
-                    <p class="card-text">Deskripsi atau penjelasan mengenai menu A.</p>
+<section id="hero" class="py-2 text-center">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="recommendation-container">
+                    <h4 class="text-center mb-3">Rekomendasi Makanan</h4>
+                    <?php
+                    switch ($rekomendasi) {
+                        case "Menu A":
+                            echo '
+                            <div class=" mb-3 text-center">
+                                <img src="salad.png" class="card-img-top img-menu" alt="Menu A">
+                                <div class="card-body">
+                                    <h5 class="card-title">Menu A</h5>
+                                    <p class="card-text">Deskripsi atau penjelasan mengenai menu A.</p>
+                                </div>
+                            </div>';
+                            break;
+                        case "Menu B":
+                            echo '
+                            <div class=" mb-3 text-center">
+                                <img src="salad.png" class="card-img-top img-menu" alt="Menu B">
+                                <div class="card-body">
+                                    <h5 class="card-title">Menu B</h5>
+                                    <p class="card-text">Deskripsi atau penjelasan mengenai menu B.</p>
+                                </div>
+                            </div>';
+                            break;
+                        case "Menu C":
+                            echo '
+                            <div class=" mb-3 text-center">
+                                <img src="salad.png" class="card-img-top img-menu" alt="Menu C">
+                                <div class="card-body">
+                                    <h5 class="card-title">Menu C</h5>
+                                    <p class="card-text">Deskripsi atau penjelasan mengenai menu C.</p>
+                                </div>
+                            </div>';
+                            break;
+                        default:
+                            echo "<p class='text-center'>Tidak ada rekomendasi makanan untuk status gizi ini.</p>";
+                    }
+                    ?>
                 </div>
-            </div>';
-            break;
-        case "Menu B":
-            echo '
-            <div class=" mb-3 text-center">
-                <img src="salad.png" class="card-img-top img-menu" alt="Menu B">
-                <div class="card-body">
-                    <h5 class="card-title">Menu B</h5>
-                    <p class="card-text">Deskripsi atau penjelasan mengenai menu B.</p>
-                </div>
-            </div>';
-            break;
-        case "Menu C":
-            echo '
-            <div class=" mb-3 text-center">
-                <img src="salad.png" class="card-img-top img-menu" alt="Menu C">
-                <div class="card-body">
-                    <h5 class="card-title">Menu C</h5>
-                    <p class="card-text">Deskripsi atau penjelasan mengenai menu C.</p>
-                </div>
-            </div>';
-            break;
-        default:
-            echo "<p class='text-center'>Tidak ada rekomendasi makanan untuk status gizi ini.</p>";
-    }
-    ?>
-</div>
-</div>
+            </div>
+        </div>
     </div>
-</div>
 </section>
+
 
 <footer class="py-4 bg-dark text-white text-center">
     <div class="container">
