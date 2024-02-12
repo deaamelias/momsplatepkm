@@ -38,7 +38,7 @@ $user_id = $_SESSION['user_id'];
         .result-container {
             background-color: #fff; /* Warna latar belakang */
             border-radius: 10px; /* Agar tampilan lebih rapi */
-            padding: 20px; /* Beri padding */
+            padding: 50px; /* Beri padding */
             box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1); /* Efek bayangan untuk kesan lebih tiga dimensi */
         }
 
@@ -74,7 +74,7 @@ $user_id = $_SESSION['user_id'];
 <section id="hero" class="py-5 text-center" style="margin-top: 50px;">
     <div class="container">
         <div class="row justify-content-center"> <!-- Menengahkan konten -->
-            <div class="col-lg-6">
+            <div class="col-lg-8">
                 <div class="result-container"> <!-- Container untuk hasil -->
                     <h3 class="text-center mb-4">Hasil Perhitungan Status Gizi</h3>
                     <?php
