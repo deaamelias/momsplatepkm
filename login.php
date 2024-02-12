@@ -2,8 +2,21 @@
 include 'koneksi.php';
 session_start();
 
+// Cek apakah cookie remembered_username sudah diset
+if(isset($_COOKIE['remembered_username'])) {
+    $remembered_username = $_COOKIE['remembered_username'];
+} else {
+    $remembered_username = '';
+}
+
+if(isset($_COOKIE['remembered_password'])) {
+    $remembered_password = $_COOKIE['remembered_password'];
+} else {
+    $remembered_password = '';
+}
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -88,12 +101,12 @@ session_start();
     <form action="proses_login.php" method="post">
         <div class="form-group">
             <label for="inputUsername"><i class="fas fa-user"></i> Username</label>
-            <input type="text" class="form-control" id="inputUsername" name="inputUsername" placeholder="Masukkan username Anda" required>
+            <input type="text" class="form-control" id="inputUsername" name="inputUsername" placeholder="Masukkan username Anda" value="<?php echo $remembered_username; ?>" required>
         </div>
         <div class="form-group">
             <label for="inputPassword"><i class="fas fa-lock"></i> Password</label>
             <div class="input-group">
-                <input type="password" class="form-control" id="inputPassword" name="inputPassword" placeholder="Masukkan kata sandi Anda" required>
+                <input type="password" class="form-control" id="inputPassword" name="inputPassword" placeholder="Masukkan kata sandi Anda" value="<?php echo $remembered_password; ?>"required>
                 <div class="input-group-append">
             <button class="btn btn-outline-secondary" type="button" id="togglePassword">
                 <i class="fas fa-eye-slash"></i>
@@ -112,6 +125,14 @@ session_start();
             unset($_SESSION['login_error']);
             ?>
         <?php endif; ?>
+        <div class="form-group form-check">
+        <?php if(isset($_COOKIE['remembered']) && $_COOKIE['remembered'] === 'true'): ?>
+            <input type="checkbox" class="form-check-input" id="rememberCheckbox" name="remember" checked>
+        <?php else: ?>
+            <input type="checkbox" class="form-check-input" id="rememberCheckbox" name="remember">
+        <?php endif; ?>
+        <label class="form-check-label" for="rememberCheckbox">Ingat Kata Sandi</label>
+    </div>
         <button type="submit" class="btn btn-primary btn-block">Login</button>
     </form>
     <div class="text-center mt-3">
@@ -126,9 +147,16 @@ session_start();
 <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 
 <script>
+document.addEventListener("DOMContentLoaded", function() {
     // Mendapatkan referensi elemen input password dan tombol toggle
     const passwordInput = document.getElementById('inputPassword');
     const togglePasswordButton = document.getElementById('togglePassword');
+    const rememberCheckbox = document.getElementById('rememberCheckbox');
+
+    // Cek apakah checkbox sebelumnya sudah dicentang
+    if (localStorage.getItem('remembered') === 'true') {
+        rememberCheckbox.checked = true;
+    }
 
     // Menambahkan event listener untuk mengubah tipe input password
     togglePasswordButton.addEventListener('click', function() {
@@ -140,8 +168,20 @@ session_start();
         this.querySelector('i').classList.toggle('fa-eye');
     });
 
-    
+    // Menambahkan event listener untuk checkbox
+    rememberCheckbox.addEventListener('change', function() {
+        if (this.checked) {
+            // Jika checkbox dicentang, set cookie untuk menyimpan statusnya
+            localStorage.setItem('remembered', 'true');
+        } else {
+            // Jika checkbox tidak dicentang, hapus cookie yang menyimpan statusnya
+            localStorage.removeItem('remembered');
+        }
+    });
+});
 </script>
+
+
 
 </body>
 </html>
