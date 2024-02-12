@@ -78,8 +78,6 @@ $user_id = $_SESSION['user_id'];
                 <div class="result-container"> <!-- Container untuk hasil -->
                     <h3 class="text-center mb-4">Hasil Perhitungan Status Gizi</h3>
                     <?php
-                    // Ambil data berat dan tinggi badan dari formulir
-                    // Periksa apakah data dari formulir sudah tersedia
                     if (isset($_POST['berat']) && isset($_POST['tinggi'])) {
                         $berat = $_POST['berat'];
                         $tinggi = $_POST['tinggi'];
@@ -103,8 +101,6 @@ $user_id = $_SESSION['user_id'];
 
                         // Buat kueri SQL untuk memasukkan data ke dalam tabel status_gizi
                         $sql = "INSERT INTO status_gizi (user_id, berat_badan, tinggi_badan, status_gizi) VALUES ('$user_id', '$berat', '$tinggi', '$status')";
-
-                        // Eksekusi kueri SQL
                         if ($conn->query($sql) === TRUE) {
                             echo "<p><strong>Berat Badan:</strong> $berat kg</p>";
                             echo "<p><strong>Tinggi Badan:</strong> $tinggi cm</p>";
@@ -128,7 +124,6 @@ $user_id = $_SESSION['user_id'];
     </div>
 </footer>
 
-<!-- Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
