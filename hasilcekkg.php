@@ -89,9 +89,8 @@ $sql = "INSERT INTO hasil_perhitungan (user_id, bb, tb, usia, aktivitas_fisik, b
     header("Location: index.php");
     exit;
 }
-// Tampilkan hasil perhitungan
-?>
 
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -245,4 +244,3 @@ $sql = "INSERT INTO hasil_perhitungan (user_id, bb, tb, usia, aktivitas_fisik, b
 
 </body>
 </html>
-
