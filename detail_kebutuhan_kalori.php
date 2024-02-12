@@ -160,6 +160,7 @@ $conn->close();
             <thead>
                 <tr>
                     <th>Tanggal</th>
+                    <th>Trimester</th>
                     <th>Berat Badan</th>
                     <th>Tinggi Badan</th>
                     <th>Usia</th>
@@ -175,6 +176,7 @@ $conn->close();
                 <?php while ($row = $result->fetch_assoc()) : ?>
                     <tr>
                         <td><?php echo $row['tanggal']; ?></td>
+                        <td><?php echo $row['trimester']; ?></td>
                         <td><?php echo $row['bb']; ?></td>
                         <td><?php echo $row['tb']; ?></td>
                         <td><?php echo $row['usia']; ?></td>
