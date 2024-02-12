@@ -137,7 +137,6 @@ $conn->close();
                     <p class="card-text"><strong>Riwayat Penyakit:</strong> <?php echo $row['riwayat_penyakit']; ?></p>
                     <p class="card-text"><strong>Riwayat Alergi:</strong> <?php echo $row['riwayat_alergi']; ?></p>
                     <p class="card-text"><strong>Jumlah Anak:</strong> <?php echo $row['jumlah_anak']; ?></p>
-                    <p class="card-text"><strong>Paritas:</strong> <?php echo $row['paritas']; ?></p>
                     <p class="card-text"><strong>Usia Kehamilan:</strong> <?php echo $row['usia_kehamilan']; ?></p>
                 </div>
             </div>
