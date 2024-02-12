@@ -195,6 +195,10 @@ $rekomendasi = rekomendasiMakanan($tee);
 </section>
 
 <!-- Container untuk rekomendasi makanan -->
+<section id="hero" class="py-5 text-center" style="margin-top: 50px;">
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
 <div class="recommendation-container" style="margin-top: 50px;">
         <h4 class="text-center mb-3">Rekomendasi Makanan</h4>
     <?php
@@ -234,6 +238,10 @@ $rekomendasi = rekomendasiMakanan($tee);
     }
     ?>
 </div>
+</div>
+    </div>
+</div>
+</section>
 
 <footer class="py-4 bg-dark text-white text-center">
     <div class="container">
