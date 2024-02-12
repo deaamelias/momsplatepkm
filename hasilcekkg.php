@@ -119,14 +119,20 @@ $sql = "INSERT INTO hasil_perhitungan (user_id, bb, tb, usia, aktivitas_fisik, b
         }
 
         /* Container untuk rekomendasi makanan */
-        .recommendation-container {
-            margin-top: 20px; /* Beri jarak atas */
-        }
-
-        .img-menu {
-    max-width: 150px; /* Atur lebar maksimum gambar */
+        /* Gaya untuk gambar menu */
+.img-menu {
+    max-width: 200px; /* Atur lebar maksimum gambar */
     height: auto; /* Biarkan tinggi gambar menyesuaikan proporsi */
+    margin: 0 auto; /* Pusatkan gambar */
 }
+
+/* Gaya untuk kontainer rekomendasi makanan */
+.recommendation-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
     </style>
 </head>
 <body>
@@ -191,8 +197,8 @@ $rekomendasi = rekomendasiMakanan($tee);
     switch ($rekomendasi) {
         case "Menu A":
             echo '
-            <div class="card mb-3">
-                <img src="diet.png" class="card-img-top" alt="Menu A">
+            <div class="card mb-3 text-center">
+                <img src="salad.png" class="card-img-top img-menu" alt="Menu A">
                 <div class="card-body">
                     <h5 class="card-title">Menu A</h5>
                     <p class="card-text">Deskripsi atau penjelasan mengenai menu A.</p>
@@ -201,8 +207,8 @@ $rekomendasi = rekomendasiMakanan($tee);
             break;
         case "Menu B":
             echo '
-            <div class="card mb-3">
-                <img src="diet.png" class="card-img-top" alt="Menu B">
+            <div class="card mb-3 text-center">
+                <img src="salad.png" class="card-img-top img-menu" alt="Menu B">
                 <div class="card-body">
                     <h5 class="card-title">Menu B</h5>
                     <p class="card-text">Deskripsi atau penjelasan mengenai menu B.</p>
@@ -211,8 +217,8 @@ $rekomendasi = rekomendasiMakanan($tee);
             break;
         case "Menu C":
             echo '
-            <div class="card mb-3">
-                <img src="diet.png" class="card-img-top" alt="Menu C">
+            <div class="card mb-3 text-center">
+                <img src="salad.png" class="card-img-top img-menu" alt="Menu C">
                 <div class="card-body">
                     <h5 class="card-title">Menu C</h5>
                     <p class="card-text">Deskripsi atau penjelasan mengenai menu C.</p>
@@ -224,9 +230,6 @@ $rekomendasi = rekomendasiMakanan($tee);
     }
     ?>
 </div>
-
-
-
 
         </div>
     </div>
