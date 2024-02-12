@@ -67,13 +67,13 @@ $fs = 1.1; // Default FS jika tidak ada pilihan yang dipilih
 $tee = $bmr  * $fa * $fs + $energi_plus;
 
 // Hitung Kebutuhan Protein (gram/hari)
-$protein = $tee * 0.15 + $protein_plus; // Misalnya menggunakan 1.1 gram protein per kilogram berat badan untuk ibu hamil
+$protein = ($tee * 0.15)/9 + $protein_plus; // Misalnya menggunakan 1.1 gram protein per kilogram berat badan untuk ibu hamil
 
 // Hitung Kebutuhan Lemak (gram/hari)
-$lemak = $tee * 0.25 + $lemak_plus; // Misalnya menggunakan 25% dari total kalori, dan 1 gram lemak = 9 kalori
+$lemak = ($tee * 0.25)/9 + $lemak_plus; // Misalnya menggunakan 25% dari total kalori, dan 1 gram lemak = 9 kalori
 
 // Hitung Kebutuhan Karbohidrat (gram/hari)
-$karbohidrat = $tee * 0.6 + $karbohidrat_plus; // Sisanya dari total kalori
+$karbohidrat = ($tee * 0.6)/9 + $karbohidrat_plus; // Sisanya dari total kalori
 
 $sql = "INSERT INTO hasil_perhitungan (user_id, bb, tb, usia, aktivitas_fisik, bmr, tee, protein, lemak, karbohidrat, trimester) 
             VALUES ('$user_id', '$berat', '$tinggi', '$usia', '$aktivitas_fisik', '$bmr', '$tee', '$protein', '$lemak', '$karbohidrat', '$trimester')";
