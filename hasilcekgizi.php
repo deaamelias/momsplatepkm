@@ -118,11 +118,7 @@ $user_id = $_SESSION['user_id'];
         </div>
     </div>
 </section>
-<footer class="py-4 bg-dark text-white text-center">
-    <div class="container">
-        &copy; 2024  Mom's Plate
-    </div>
-</footer>
+
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
