@@ -91,19 +91,14 @@ $user_id = $_SESSION['user_id'];
                         // Tentukan status gizi berdasarkan IMT
                         if ($imt < 17.0) {
                             $status = "Berat badan kurang tingkat BERAT";
-                            $rekomendasi = "Menu A";
                         } elseif ($imt >= 17.0 && $imt < 18.5) {
                             $status = "Berat badan kurang tingkat RINGAN";
-                            $rekomendasi = "Menu A";
                         } elseif ($imt >= 18.5 && $imt < 25.1) {
                             $status = "Berat badan normal";
-                            $rekomendasi = "Menu B";
                         } elseif ($imt >= 25.1 && $imt < 27.1) {
                             $status = "Berat badan berlebih tingkat RINGAN";
-                            $rekomendasi = "Menu C";
                         } else {
                             $status = "Berat badan berlebih tingkat BERAT";
-                            $rekomendasi = "Menu E";
                         }
 
                         // Buat kueri SQL untuk memasukkan data ke dalam tabel status_gizi
@@ -120,64 +115,6 @@ $user_id = $_SESSION['user_id'];
                         }
                     } else {
                         echo "Data berat dan tinggi badan belum tersedia.";
-                    }
-                    ?>
-                </div>
-
-                <!-- Container untuk rekomendasi makanan -->
-                <div class="recommendation-container" style="margin-top: 50px;">
-                    <h4 class="text-center mb-3">Rekomendasi Makanan</h4>
-                    <?php
-                    if (isset($rekomendasi)) {
-                        switch ($rekomendasi) {
-                            case "Menu A":
-                                echo '
-                                <div class="card mb-3">
-                                    <img src="salad.png" class="card-img-top" alt="Menu A">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Menu A</h5>
-                                        <p class="card-text">Rekomendasi makanan untuk berat badan kurang:</p>
-                                        <ul class="list-unstyled">
-                                            <li>Makanan A1</li>
-                                            <li>Makanan A2</li>
-                                            <li>Makanan A3</li>
-                                        </ul>
-                                    </div>
-                                </div>';
-                                break;
-                            case "Menu B":
-                                echo '
-                                <div class="card mb-3">
-                                    <img src="salad.png" class="card-img-top" alt="Menu B">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Menu B</h5>
-                                        <p class="card-text">Rekomendasi makanan untuk berat badan normal:</p>
-                                        <ul class="list-unstyled">
-                                            <li>Makanan B1</li>
-                                            <li>Makanan B2</li>
-                                            <li>Makanan B3</li>
-                                        </ul>
-                                    </div>
-                                </div>';
-                                break;
-                            case "Menu C":
-                                echo '
-                                <div class="card mb-3">
-                                    <img src="salad.png" class="card-img-top" alt="Menu C">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Menu C</h5>
-                                        <p class="card-text">Rekomendasi makanan untuk berat badan berlebih:</p>
-                                        <ul class="list-unstyled">
-                                            <li>Makanan C1</li>
-                                            <li>Makanan C2</li>
-                                            <li>Makanan C3</li>
-                                        </ul>
-                                    </div>
-                                </div>';
-                                break;
-                            default:
-                                echo "<p class='text-center'>Tidak ada rekomendasi makanan untuk status gizi ini.</p>";
-                        }
                     }
                     ?>
                 </div>
