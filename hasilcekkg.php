@@ -98,7 +98,7 @@ $sql = "INSERT INTO hasil_perhitungan (user_id, bb, tb, usia, aktivitas_fisik, b
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hasil Perhitungan Kebutuhan Kalori</title>
+    <title>Hasil Perhitungan Kebutuhan Gizi</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Font Roboto -->
@@ -158,7 +158,7 @@ $sql = "INSERT INTO hasil_perhitungan (user_id, bb, tb, usia, aktivitas_fisik, b
     <div class="row justify-content-center">
         <div class="col-lg-6">
         <div class="result-container">
-            <h2 class="text-center">Hasil Perhitungan Kebutuhan Kalori untuk Ibu Hamil</h2>
+            <h2 class="text-center">Hasil Perhitungan Kebutuhan Gizi untuk Ibu Hamil</h2>
             <img src="cek.png" class="img-fluid mb-3 img-menu" alt="Perhitungan IMT">
             <p>BMR (Basal Metabolic Rate): <b><?php echo round($bmr, 2); ?> </b>kalori/hari</p>
             <p>TEE (Total Energy Expenditure): <b><?php echo round($tee, 2); ?> </b>kalori/hari</p>

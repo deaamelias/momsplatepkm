@@ -95,7 +95,7 @@ $user_id = $_SESSION['user_id'];
             <!-- Formulir untuk perhitungan status gizi -->
             <div class="card">
                 <div class="card-body">
-                    <h3 class="card-title">Perhitungan Kebutuhan Kalori</h3>
+                    <h3 class="card-title">Perhitungan Kebutuhan Gizi</h3>
                     <form action="hasilcekkg.php" method="post">
                     <div class="form-group">
         <label for="tinggi">Tinggi Badan (cm)</label>
