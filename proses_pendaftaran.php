@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $register_stmt = $conn->prepare($register_sql);
                 if ($register_stmt) {
                     // Bind parameter ke statement
-                    $register_stmt->bind_param("sssssssssss", $username, $nama, $email, $telepon, $password, $riwayat_penyakit, $riwayat_alergi, $jumlah_anak, $usia_kehamilan, $role);
+                    $register_stmt->bind_param("ssssssssss", $username, $nama, $email, $telepon, $password, $riwayat_penyakit, $riwayat_alergi, $jumlah_anak, $usia_kehamilan, $role);
                     
                     // Eksekusi statement
                     if ($register_stmt->execute()) {
