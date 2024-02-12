@@ -156,67 +156,66 @@ $sql = "INSERT INTO hasil_perhitungan (user_id, bb, tb, usia, aktivitas_fisik, b
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-lg-6">
-        <div class="result-container">
-            <h2 class="text-center">Hasil Perhitungan Kebutuhan Gizi untuk Ibu Hamil</h2>
-            <img src="cek.png" class="img-fluid mb-3 img-menu" alt="Perhitungan IMT">
-            <p>BMR (Basal Metabolic Rate): <b><?php echo round($bmr, 2); ?> </b>kalori/hari</p>
-            <p>TEE (Total Energy Expenditure): <b><?php echo round($tee, 2); ?> </b>kalori/hari</p>
-            <p>Kebutuhan Protein: <b><?php echo round($protein, 2); ?> </b>gram/hari</p>
-            <p>Kebutuhan Lemak: <b><?php echo round($lemak, 2); ?> </b>gram/hari</p>
-            <p>Kebutuhan Karbohidrat: <b><?php echo round($karbohidrat, 2); ?> </b>gram/hari</p>
+            <div class="result-container">
+                <h2 class="text-center">Hasil Perhitungan Kebutuhan Gizi untuk Ibu Hamil</h2>
+                <img src="cek.png" class="img-fluid mb-3 img-menu" alt="Perhitungan IMT">
+                <p>BMR (Basal Metabolic Rate): <b><?php echo round($bmr, 2); ?> </b>kalori/hari</p>
+                <p>TEE (Total Energy Expenditure): <b><?php echo round($tee, 2); ?> </b>kalori/hari</p>
+                <p>Kebutuhan Protein: <b><?php echo round($protein, 2); ?> </b>gram/hari</p>
+                <p>Kebutuhan Lemak: <b><?php echo round($lemak, 2); ?> </b>gram/hari</p>
+                <p>Kebutuhan Karbohidrat: <b><?php echo round($karbohidrat, 2); ?> </b>gram/hari</p>
+            </div>
         </div>
     </div>
-</div>
 
+    <?php
+// Fungsi untuk memberikan rekomendasi makanan berdasarkan kebutuhan gizi
+function rekomendasiMakanan($tee) {
+    if ($tee < 2000) {
+        return "Menu A"; // Misalnya, menu untuk kebutuhan kalori kurang dari 2000
+    } elseif ($tee >= 2000 && $tee < 2500) {
+        return "Menu B"; // Misalnya, menu untuk kebutuhan kalori antara 2000-2500
+    } else {
+        return "Menu C"; // Misalnya, menu untuk kebutuhan kalori lebih dari 2500
+    }
+}
 
+// Mendapatkan rekomendasi makanan berdasarkan TEE
+$rekomendasi = rekomendasiMakanan($tee);
+?>
 
-            <!-- Container untuk rekomendasi makanan -->
-            <div class="recommendation-container" style="margin-top: 50px;">
+<!-- Container untuk rekomendasi makanan -->
+<div class="recommendation-container" style="margin-top: 50px;">
     <h4 class="text-center mb-3">Rekomendasi Makanan</h4>
     <?php
     switch ($rekomendasi) {
         case "Menu A":
             echo '
             <div class="card mb-3">
-                <img src="salad.png" class="card-img-top" alt="Menu A">
+                <img src="diet.png" class="card-img-top" alt="Menu A">
                 <div class="card-body">
                     <h5 class="card-title">Menu A</h5>
-                    <p class="card-text">Rekomendasi makanan untuk berat badan kurang:</p>
-                    <ul class="list-unstyled">
-                        <li>Makanan A1</li>
-                        <li>Makanan A2</li>
-                        <li>Makanan A3</li>
-                    </ul>
+                    <p class="card-text">Deskripsi atau penjelasan mengenai menu A.</p>
                 </div>
             </div>';
             break;
         case "Menu B":
             echo '
             <div class="card mb-3">
-                <img src="salad.png" class="card-img-top" alt="Menu B">
+                <img src="diet.png" class="card-img-top" alt="Menu B">
                 <div class="card-body">
                     <h5 class="card-title">Menu B</h5>
-                    <p class="card-text">Rekomendasi makanan untuk berat badan normal:</p>
-                    <ul class="list-unstyled">
-                        <li>Makanan B1</li>
-                        <li>Makanan B2</li>
-                        <li>Makanan B3</li>
-                    </ul>
+                    <p class="card-text">Deskripsi atau penjelasan mengenai menu B.</p>
                 </div>
             </div>';
             break;
         case "Menu C":
             echo '
             <div class="card mb-3">
-                <img src="salad.png" class="card-img-top" alt="Menu C">
+                <img src="diet.png" class="card-img-top" alt="Menu C">
                 <div class="card-body">
                     <h5 class="card-title">Menu C</h5>
-                    <p class="card-text">Rekomendasi makanan untuk berat badan berlebih:</p>
-                    <ul class="list-unstyled">
-                        <li>Makanan C1</li>
-                        <li>Makanan C2</li>
-                        <li>Makanan C3</li>
-                    </ul>
+                    <p class="card-text">Deskripsi atau penjelasan mengenai menu C.</p>
                 </div>
             </div>';
             break;
@@ -225,6 +224,8 @@ $sql = "INSERT INTO hasil_perhitungan (user_id, bb, tb, usia, aktivitas_fisik, b
     }
     ?>
 </div>
+
+
 
 
         </div>
