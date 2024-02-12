@@ -89,17 +89,20 @@ $user_id = $_SESSION['user_id'];
                     $imt = $berat / ($tinggi_meter * $tinggi_meter);
 
                     // Tentukan status gizi berdasarkan IMT
-                    if ($imt < 18.5) {
-                        $status = "Berat badan kurang";
+                    if ($imt < 17.0) {
+                        $status = "Berat badan kurang tingkat BERAT";
                         $rekomendasi = "Menu A";
-                    } elseif ($imt >= 18.5 && $imt < 24.9) {
+                    }elseif ($imt >= 17.0 && < 18.5) {
+                        $status = "Berat badan kurang tingkat RINGAN";
+                        $rekomendasi = "Menu A";
+                    } elseif ($imt >= 18.5 && $imt < 25.1) {
                         $status = "Berat badan normal";
                         $rekomendasi = "Menu B";
-                    } elseif ($imt >= 24.9 && $imt < 29.9) {
-                        $status = "Berat badan berlebih";
+                    } elseif ($imt >= 25.1 && $imt < 27.1) {
+                        $status = "Berat badan berlebih tingkat RINGAN";
                         $rekomendasi = "Menu C";
                     } else {
-                        $status = "Obesitas";
+                        $status = "Berat badan berlebih tingkat BERAT";
                         $rekomendasi = "Menu D";
                     }
 
