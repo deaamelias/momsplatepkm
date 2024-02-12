@@ -1,5 +1,7 @@
 <?php
-include 'koneksi.php';
+session_start(); // Mulai sesi
+
+include 'koneksi.php'; // Memasukkan file koneksi database
 
 // Periksa apakah form telah disubmit
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -14,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $riwayat_alergi = isset($_POST['inputRiwayatAlergi']) && !empty($_POST['inputRiwayatAlergi']) ? $_POST['inputRiwayatAlergi'] : '-';
     $jumlah_anak = $_POST['inputJumlahAnak'];
     $usia_kehamilan = $_POST['inputUsiaKehamilan'];
-   
+
     // Query SQL untuk memeriksa apakah username sudah ada di database
     $check_username_sql = "SELECT * FROM users WHERE username = ?";
     
@@ -43,12 +45,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 if ($register_stmt) {
                     // Bind parameter ke statement
                     $register_stmt->bind_param("ssssssssss", $username, $nama, $email, $telepon, $password, $riwayat_penyakit, $riwayat_alergi, $jumlah_anak, $usia_kehamilan, $role);
-                    $_SESSION['username'] = $username;
-                    $_SESSION['user_id'] = $register_stmt['id'];
-
+                    
                     // Eksekusi statement
                     if ($register_stmt->execute()) {
-                        // Jika pendaftaran berhasil, langsung redirect ke dashboard.php
+                        // Jika pendaftaran berhasil, dapatkan id pengguna yang baru saja ditambahkan
+                        $user_id = $register_stmt->insert_id;
+                        
+                        // Set session untuk username dan user_id
+                        $_SESSION['username'] = $username;
+                        $_SESSION['user_id'] = $user_id;
+
+                        // Redirect ke dashboard.php
                         header("Location: dashboard.php");
                         exit(); // Pastikan tidak ada output lain sebelum header
                     } else {
