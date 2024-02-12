@@ -131,6 +131,10 @@ $sql = "INSERT INTO hasil_perhitungan (user_id, bb, tb, usia, aktivitas_fisik, b
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
+            background-color: #fff; /* Warna latar belakang */
+            border-radius: 10px; /* Agar tampilan lebih rapi */
+            padding: 20px; /* Beri padding */
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1); /* Efek bayangan untuk kesan lebih tiga dimensi */
         }
 
     </style>
@@ -195,7 +199,7 @@ $rekomendasi = rekomendasiMakanan($tee);
 </section>
 
 <!-- Container untuk rekomendasi makanan -->
-<section id="hero" class="py-5 text-center" style="margin-top: 50px;">
+<section id="hero" class="py-5 text-center" style="margin-top: 20px;">
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-lg-6">
