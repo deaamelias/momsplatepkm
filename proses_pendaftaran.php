@@ -1,5 +1,7 @@
 <?php
-include 'koneksi.php';
+session_start(); // Mulai sesi
+
+include 'koneksi.php'; // Memasukkan file koneksi database
 
 // Periksa apakah form telah disubmit
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -10,12 +12,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $telepon = $_POST['inputTelepon'];
     $password = hash('sha256', $_POST['inputPassword']); // Hashing password menggunakan SHA-256
     $role = 'user'; // Tentukan role pengguna
-    $riwayat_penyakit = isset($_POST['inputRiwayatPenyakit']) ? $_POST['inputRiwayatPenyakit'] : '';
-    $riwayat_alergi = isset($_POST['inputRiwayatAlergi']) ? $_POST['inputRiwayatAlergi'] : '';
-    $jumlah_anak = isset($_POST['inputJumlahAnak']) ? $_POST['inputJumlahAnak'] : '';
-    $paritas = isset($_POST['inputParitas']) ? $_POST['inputParitas'] : '';
-    $usia_kehamilan = isset($_POST['inputUsiaKehamilan']) ? $_POST['inputUsiaKehamilan'] : '';
-   
+    $riwayat_penyakit = isset($_POST['inputRiwayatPenyakit']) && !empty($_POST['inputRiwayatPenyakit']) ? $_POST['inputRiwayatPenyakit'] : '-';
+    $riwayat_alergi = isset($_POST['inputRiwayatAlergi']) && !empty($_POST['inputRiwayatAlergi']) ? $_POST['inputRiwayatAlergi'] : '-';
+    $jumlah_anak = $_POST['inputJumlahAnak'];
+    $usia_kehamilan = $_POST['inputUsiaKehamilan'];
+
     // Query SQL untuk memeriksa apakah username sudah ada di database
     $check_username_sql = "SELECT * FROM users WHERE username = ?";
     
@@ -36,18 +37,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             } else {
                 // Jika username belum ada, lanjutkan dengan proses pendaftaran
                 // Query SQL untuk menyimpan data pengguna ke database
-                $register_sql = "INSERT INTO users (username, nama, email, telepon, password, riwayat_penyakit, riwayat_alergi, jumlah_anak, paritas, usia_kehamilan, role) 
-                                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                $register_sql = "INSERT INTO users (username, nama, email, telepon, password, riwayat_penyakit, riwayat_alergi, jumlah_anak, usia_kehamilan, role) 
+                                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             
                 // Persiapkan statement
                 $register_stmt = $conn->prepare($register_sql);
                 if ($register_stmt) {
                     // Bind parameter ke statement
-                    $register_stmt->bind_param("sssssssssss", $username, $nama, $email, $telepon, $password, $riwayat_penyakit, $riwayat_alergi, $jumlah_anak, $paritas, $usia_kehamilan, $role);
+                    $register_stmt->bind_param("ssssssssss", $username, $nama, $email, $telepon, $password, $riwayat_penyakit, $riwayat_alergi, $jumlah_anak, $usia_kehamilan, $role);
                     
                     // Eksekusi statement
                     if ($register_stmt->execute()) {
-                        // Jika pendaftaran berhasil, langsung redirect ke dashboard.php
+                        // Jika pendaftaran berhasil, dapatkan id pengguna yang baru saja ditambahkan
+                        $user_id = $register_stmt->insert_id;
+                        
+                        // Set session untuk username dan user_id
+                        $_SESSION['username'] = $username;
+                        $_SESSION['user_id'] = $user_id;
+
+                        // Redirect ke dashboard.php
                         header("Location: dashboard.php");
                         exit(); // Pastikan tidak ada output lain sebelum header
                     } else {

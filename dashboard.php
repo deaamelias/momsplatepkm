@@ -1,3 +1,22 @@
+<?php
+// Ambil ID user dari sesi
+session_start();
+
+// Periksa apakah pengguna sudah login atau belum
+if (!isset($_SESSION['user_id'])) {
+    // Jika belum login, redirect ke halaman login
+    header('Location: index.php');
+    exit();
+}
+
+// Ambil ID user dari sesi
+$user_id = $_SESSION['user_id'];
+
+// Sekarang Anda dapat menggunakan $user_id untuk mengakses data yang terkait dengan pengguna tersebut
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -66,7 +85,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#fitur">Perhitungan</a>
+                    <a class="nav-link" href="#fitur">Cek Gizi</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#rekomendasi-makanan">Rekomendasi Makanan</a>
@@ -74,6 +93,10 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#konsultasi-online">Konsultasi</a>
                 </li>
+                <li class="nav-item">
+    <a class="nav-link" href="view_profile.php">Akun</a>
+</li>
+
                 <li class="nav-item">
                     <a class="nav-link" href="logout.php">Logout</a>
                 </li>
@@ -106,7 +129,7 @@
                     <div class="card-body text-center">
                         <img src="diet.png" class="img-fluid mb-3 img-menu" alt="Perhitungan Status Gizi">
                         <h3 class="card-title">Cek Status Gizi</h3>
-                        <p class="card-text">Hitung indeks massa tubuh (IMT) berdasarkan data berat badan dan tinggi badan pengguna.</p>
+                        <p class="card-text">Dengan fitur ini, Anda dapat mengetahui status gizi Anda dengan mudah. Lakukan perhitungan IMT untuk mengetahui apakah berat badan Anda ideal, kurang, atau berlebihan.</p>
                     </div>
                     <div class="card-footer">
                         <a href="cekgizi.php" class="btn btn-primary stretched-link">Mulai</a>
@@ -119,8 +142,8 @@
                 <div class="card h-100">
                     <div class="card-body text-center">
                         <img src="cek.png" class="img-fluid mb-3 img-menu" alt="Perhitungan IMT">
-                        <h3 class="card-title">Perhitungan Kebutuhan Gizi</h3>
-                        <p class="card-text">Lakukan perhitungan IMT dan berikan interpretasi hasilnya.</p>
+                        <h3 class="card-title">Cek Kebutuhan Kalori</h3>
+                        <p class="card-text">Dengan fitur ini, Anda dapat menghitung kebutuhan kalori harian Anda. Dapatkan informasi yang diperlukan untuk menjaga keseimbangan nutrisi dan gaya hidup sehat.</p>
                     </div>
                     <div class="card-footer">
                         <a href="cekkg.php" class="btn btn-primary stretched-link">Mulai</a>
@@ -131,53 +154,179 @@
     </div>
 </section>
 
-
-
-
-
-
 <!-- Rekomendasi Makanan Section -->
-<section id="rekomendasi-makanan" class="py-5 ">
+<section id="rekomendasi-makanan" class="py-5">
+<div class="container">
+        <h2 class="text-center mb-4"><b>Rekomendasi Makanan untuk Ibu Hamil dan Pencegahan Diabetes Gestasional</b></h2>
+        <p class="lead text-center">Menurut asupan referensi diet, untuk memenuhi kebutuhan gizi makro dan mikro hariannya ibu hamil disarankan untuk mengkonsumsi </p>
+        <div class="row">
+
+            <div class="col-lg-6 mb-6">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <img src="carbohydrates.png" class="img-fluid mb-3 img-menu" alt="Karbohidrat">
+                        <h4 class="card-title">Karbohidrat</h4>
+                        <p class="card-text">Minimal 175 g (700 kkal)</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 mb-6">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <img src="protein.png" class="img-fluid mb-3 img-menu" alt="Protein">
+                        <h4 class="card-title">Protein</h4>
+                        <p class="card-text">Minimal 71 g (300 kkal)</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 mb-6">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <img src="oil.png" class="img-fluid mb-3 img-menu" alt="Lemak">
+                        <h4 class="card-title">Lemak</h4>
+                        <p class="card-text">Minimal 56 g (500 kkal)</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 mb-6">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <img src="vegetable.png" class="img-fluid mb-3 img-menu" alt="Serat">
+                        <h4 class="card-title">Serat</h4>
+                        <p class="card-text">Minimal 28 g</p>
+                    </div>
+                </div>
+            </div>
+            
+
+        </div>
+    
+        <p class="lead text-center">Selain itu, ibu hamil dengan diabetes gestasional juga perlu memperhatikan jenis karbohidrat yang dikonsumsi. Karbohidrat dengan indeks glikemik yang rendah dan serat yang tinggi serta membatasi konsumsi lemak yang jenuh sangat dianjurkan. Untuk mencegah diabetes gestasional dan menjaga kesehatan ibu dan bayi, berikut adalah rekomendasi makanan yang boleh dan tidak boleh dikonsumsi:</p>
+    </div>
+    </div>
+    </div>
+    </section>
+    <section id="baik-makanan" class="bg-light py-5">
     <div class="container">
-        <h2><b><em>Rekomendasi Makanan</b></em></h2>
-        <p>Berikan rekomendasi makanan berdasarkan data yang dimasukkan pengguna.</p>
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="text-center mb-4"><b>Makanan yang Dianjurkan</b></h3>
+                <p class="lead">Adapun hal-hal yang harus diperhatikan oleh ibu hamil dengan diabetes gestsional dalam satu piring makanan yang dikonsumsi adalah:</p>
+                <ul class="lead">
+                    <li>Setengah dari piring makan yang dikonsumsi harus berupa sayuran tidak bertepung seperti mentimun, terong, jamur, brokoli, bayam, kol, dan sebagainya.</li>
+                    <li>Seperempat dari piring berisi protein tanpa lemak seperti tahu, daging sapi tanpa lemak, ikan nila, ikan tuna, ikan salmon, dan sebagainya</li>
+                    <li>Seperempat sisanya berupa karbohidrat atau makanan bertepung seperti kentang, nasi, pasta dan sebagainya</li>
+                </ul>
+                <p class="lead">Selain itu, penderita diabetes gestasional juga dianjurkan untuk mengkonsumsi makanan yang belum mengalami pengolahan apa pun atau biasa dikenal dengan makanan utuh seperti:</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 mb-3">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <img src="fruit.png" class="img-fluid mb-3 img-menu" alt="Buah">
+                        <h4 class="card-title">Buah-Buahan Segar</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 mb-3">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <img src="vegetable.png" class="img-fluid mb-3 img-menu" alt="Sayur">
+                        <h4 class="card-title">Sayuran</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 mb-3">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <img src="peanut.png" class="img-fluid mb-3 img-menu" alt="Kacang">
+                        <h4 class="card-title">Kacang</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 mb-3">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <img src="seed.png" class="img-fluid mb-3 img-menu" alt="Biji">
+                        <h4 class="card-title">Biji</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
+
+<section id="buruk-makanan" class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="text-center mb-4"><b>Makanan yang Tidak Dianjurkan</b></h3>
+                <p class="lead">Adapun hal-hal yang harus diperhatikan oleh ibu hamil dengan diabetes gestsional dalam satu piring makanan yang dikonsumsi adalah:</p>
+                <ul class="lead">
+                    <li>Setengah dari piring makan yang dikonsumsi harus berupa sayuran tidak bertepung seperti mentimun, terong, jamur, brokoli, bayam, kol, dan sebagainya.</li>
+                    <li>Seperempat dari piring berisi protein tanpa lemak seperti tahu, daging sapi tanpa lemak, ikan nila, ikan tuna, ikan salmon, dan sebagainya</li>
+                    <li>Seperempat sisanya berupa karbohidrat atau makanan bertepung seperti kentang, nasi, pasta dan sebagainya</li>
+                </ul>
+                <p class="lead">Selain itu, penderita diabetes gestasional juga dianjurkan untuk mengkonsumsi makanan yang belum mengalami pengolahan apa pun atau biasa dikenal dengan makanan utuh seperti:</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 mb-3">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <img src="fruit.png" class="img-fluid mb-3 img-menu" alt="Buah">
+                        <h4 class="card-title">Buah-Buahan Segar</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 mb-3">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <img src="vegetable.png" class="img-fluid mb-3 img-menu" alt="Sayur">
+                        <h4 class="card-title">Sayuran</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 mb-3">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <img src="peanut.png" class="img-fluid mb-3 img-menu" alt="Kacang">
+                        <h4 class="card-title">Kacang</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 mb-3">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <img src="seed.png" class="img-fluid mb-3 img-menu" alt="Biji">
+                        <h4 class="card-title">Biji</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p class="lead">Perhatikan pola makan dan pastikan untuk mengonsumsi makanan seimbang serta berkonsultasi dengan dokter atau ahli gizi untuk rencana diet yang sesuai dengan kebutuhan Anda selama kehamilan.</p>
+        <div class="text-center">
+            <img src="bumil.jpeg" class="img-fluid mt-4" style="max-width: 500px;" alt="Rekomendasi Makanan untuk Ibu Hamil">
+        </div>
+    </div>
+</section>
+
+
 
 <section id="konsultasi-online" class="py-5 bg-light">
     <div class="container">
         <h2 class="text-center"><b><em>Konsultasi Online</b></em></h2>
+        <p class="card-text">Dapatkan akses langsung untuk konsultasi pribadi tentang nutrisi, rencana diet, dan gaya hidup sehat. Sampaikan pertanyaan Anda, diskusikan tujuan kesehatan Anda, dan dapatkan saran yang disesuaikan untuk mencapai target gizi Anda.</p>
         <div class="row">
-            <div class="col-lg-4 mb-4">
+            <div class="col-lg-12 mb-12">
                 <div class="card h-100">
                     <div class="card-body text-center">
                         <img src="whatsapp.png" class="img-fluid mb-3 img-menu" alt="Konsultasi Online" style="max-width: 100px;">
-                        <h4 class="card-title">Lailaturrahmah</h4>
+                        <h4 class="card-title">Grup Konsultasi</h4>
                     </div>
                     <div class="card-footer">
-                        <a href="https://wa.me/6281234567890" target="_blank" class="btn btn-primary btn-block">Chat</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 mb-4">
-                <div class="card h-100">
-                    <div class="card-body text-center">
-                        <img src="whatsapp.png" class="img-fluid mb-3 img-menu" alt="Konsultasi Online" style="max-width: 100px;">
-                        <h4 class="card-title">Izqi</h4>
-                    </div>
-                    <div class="card-footer">
-                        <a href="https://wa.me/6281234567891" target="_blank" class="btn btn-primary btn-block">Chat</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 mb-4">
-                <div class="card h-100">
-                    <div class="card-body text-center">
-                        <img src="whatsapp.png" class="img-fluid mb-3 img-menu" alt="Konsultasi Online" style="max-width: 100px;">
-                        <h4 class="card-title">Nadya</h4>
-                    </div>
-                    <div class="card-footer">
-                        <a href="https://wa.me/6281234567892" target="_blank" class="btn btn-primary btn-block">Chat</a>
+                        <a href="https://wa.me/6281234567890" target="_blank" class="btn btn-primary btn-block">Join</a>
                     </div>
                 </div>
             </div>
@@ -195,6 +344,18 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- Letakkan di bagian akhir body -->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/your_widget_code';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
 
 </body>
 </html>
