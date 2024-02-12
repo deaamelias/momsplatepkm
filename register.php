@@ -94,29 +94,29 @@
     </div>
     <small id="passwordHelp" class="form-text text-muted">Password harus memiliki minimal 8 karakter.</small>
 </div>
-
 <hr>
-<h4 class="mb-3">Data Diri</h4>
-<div class="form-group">
-    <label for="inputRiwayatPenyakit">Riwayat Penyakit</label>
-    <input type="text" class="form-control" id="inputRiwayatPenyakit" name="inputRiwayatPenyakit" placeholder="Riwayat penyakit Anda">
-</div>
-<div class="form-group">
-    <label for="inputRiwayatAlergi">Riwayat Alergi</label>
-    <input type="text" class="form-control" id="inputRiwayatAlergi" name="inputRiwayatAlergi" placeholder="Riwayat alergi Anda">
-</div>
-<div class="form-group">
-    <label for="inputJumlahAnak">Jumlah Anak</label>
-    <input type="number" class="form-control" id="inputJumlahAnak" name="inputJumlahAnak" placeholder="Jumlah anak yang dimiliki" min="0">
-</div>
-<div class="form-group">
-    <label for="inputParitas">Paritas</label>
-    <input type="text" class="form-control" id="inputParitas" name="inputParitas" placeholder="Paritas">
-</div>
-<div class="form-group">
-    <label for="inputUsiaKehamilan">Usia Kehamilan (Bulan)</label>
-    <input type="number" class="form-control" id="inputUsiaKehamilan" name="inputUsiaKehamilan" placeholder="Usia kehamilan Anda" min="1" max="12">
-</div>
+    <h4 class="mb-3">Data Diri</h4>
+    <div class="form-group">
+        <label for="inputRiwayatPenyakit">Riwayat Penyakit</label>
+        <input type="text" class="form-control" id="inputRiwayatPenyakit" name="inputRiwayatPenyakit" placeholder="Riwayat penyakit Anda">
+    </div>
+    <div class="form-group">
+        <label for="inputRiwayatAlergi">Riwayat Alergi</label>
+        <input type="text" class="form-control" id="inputRiwayatAlergi" name="inputRiwayatAlergi" placeholder="Riwayat alergi Anda">
+    </div>
+    <div class="form-group">
+        <label for="inputJumlahAnak">Jumlah Anak</label>
+        <input type="number" class="form-control" id="inputJumlahAnak" name="inputJumlahAnak" placeholder="Jumlah anak yang dimiliki" min="0" required>
+    </div>
+    <div class="form-group">
+        <label for="inputParitas">Paritas</label>
+        <input type="text" class="form-control" id="inputParitas" name="inputParitas" placeholder="Paritas" required>
+    </div>
+    <div class="form-group">
+        <label for="inputUsiaKehamilan">Usia Kehamilan (Bulan)</label>
+        <input type="number" class="form-control" id="inputUsiaKehamilan" name="inputUsiaKehamilan" placeholder="Usia kehamilan Anda" min="1" max="12" required>
+    </div>
+
 
                         <button type="submit" class="btn btn-primary btn-block">Daftar</button>
                     </form>
