@@ -203,13 +203,13 @@ $rekomendasi = rekomendasiMakanan($tee);
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-lg-6">
-<div class="recommendation-container" style="margin-top: 50px;">
+<div class="recommendation-container">
         <h4 class="text-center mb-3">Rekomendasi Makanan</h4>
     <?php
     switch ($rekomendasi) {
         case "Menu A":
             echo '
-            <div class="card mb-3 text-center">
+            <div class="mb-3 text-center">
                 <img src="salad.png" class="card-img-top img-menu" alt="Menu A">
                 <div class="card-body">
                     <h5 class="card-title">Menu A</h5>
@@ -219,7 +219,7 @@ $rekomendasi = rekomendasiMakanan($tee);
             break;
         case "Menu B":
             echo '
-            <div class="card mb-3 text-center">
+            <div class=" mb-3 text-center">
                 <img src="salad.png" class="card-img-top img-menu" alt="Menu B">
                 <div class="card-body">
                     <h5 class="card-title">Menu B</h5>
@@ -229,7 +229,7 @@ $rekomendasi = rekomendasiMakanan($tee);
             break;
         case "Menu C":
             echo '
-            <div class="card mb-3 text-center">
+            <div class=" mb-3 text-center">
                 <img src="salad.png" class="card-img-top img-menu" alt="Menu C">
                 <div class="card-body">
                     <h5 class="card-title">Menu C</h5>
