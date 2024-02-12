@@ -103,7 +103,7 @@ $user_id = $_SESSION['user_id'];
                             $rekomendasi = "Menu C";
                         } else {
                             $status = "Berat badan berlebih tingkat BERAT";
-                            $rekomendasi = "Menu D";
+                            $rekomendasi = "Menu E";
                         }
 
                         // Buat kueri SQL untuk memasukkan data ke dalam tabel status_gizi
