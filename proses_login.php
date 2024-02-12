@@ -22,6 +22,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Jika data ditemukan, ambil informasi pengguna
         $user = $result->fetch_assoc();
 
+        // Periksa apakah checkbox "Ingat Saya" dicentang
+        if(isset($_POST['remember']) && $_POST['remember'] === 'on') {
+            // Set cookie untuk menyimpan username pengguna
+            setcookie('remembered_username', $username, time() + (86400 * 30), '/'); 
+            setcookie('remembered_password', $password, time() + (86400 * 30), '/');
+        } else {
+            // Hapus cookie jika checkbox "Ingat Saya" tidak dicentang
+            unset($_COOKIE['remembered_username']);
+            setcookie('remembered_username', '', time() - 3600, '/');
+
+            unset($_COOKIE['remembered_password']);
+            setcookie('remembered_password', '', time() - 3600, '/');
+            
+        }
+
         $_SESSION['username'] = $username;
     $_SESSION['user_id'] = $user['id'];
 
