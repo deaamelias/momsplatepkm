@@ -10,11 +10,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $telepon = $_POST['inputTelepon'];
     $password = hash('sha256', $_POST['inputPassword']); // Hashing password menggunakan SHA-256
     $role = 'user'; // Tentukan role pengguna
-    $riwayat_penyakit = isset($_POST['inputRiwayatPenyakit']) ? $_POST['inputRiwayatPenyakit'] : '';
-    $riwayat_alergi = isset($_POST['inputRiwayatAlergi']) ? $_POST['inputRiwayatAlergi'] : '';
-    $jumlah_anak = isset($_POST['inputJumlahAnak']) ? $_POST['inputJumlahAnak'] : '';
-    $paritas = isset($_POST['inputParitas']) ? $_POST['inputParitas'] : '';
-    $usia_kehamilan = isset($_POST['inputUsiaKehamilan']) ? $_POST['inputUsiaKehamilan'] : '';
+    $riwayat_penyakit = $_POST['inputRiwayatPenyakit'];
+    $riwayat_alergi = $_POST['inputRiwayatAlergi'];
+    $jumlah_anak = $_POST['inputJumlahAnak'];
+    $paritas = $_POST['inputParitas'];
+    $usia_kehamilan = $_POST['inputUsiaKehamilan'];
    
     // Query SQL untuk memeriksa apakah username sudah ada di database
     $check_username_sql = "SELECT * FROM users WHERE username = ?";
