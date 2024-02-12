@@ -113,15 +113,6 @@ $user_id = $_SESSION['user_id'];
     </div>
 </section>
 
-<footer class="py-4">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                &copy; 2024  Mom's Plate
-            </div>
-        </div>
-    </div>
-</footer>
 
 <!-- Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
