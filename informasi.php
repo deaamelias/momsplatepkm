@@ -89,7 +89,7 @@ if(isset($_GET['id'])) {
                         <h2 class="mb-4">' . $row['judul'] . '</h2>
                     </div>
                     <div class="text-center">
-                        <img src="' . $row['gambar'] . '" alt="' . $row['judul'] . '" class="info-img" style="max-width: 150px;">
+                        <img src="' . $row['gambar'] . '" alt="' . $row['judul'] . '" class="info-img" style="max-width: 300px;"><br><br>
                     </div>
                     <div>
                         <p>' . $row['info'] . '</p>
@@ -112,12 +112,7 @@ $conn->close();
 
 
 
-    <footer class="py-4 bg-dark text-white text-center">
-        <div class="container">
-            &copy; 2024  Mom's Plate
-        </div>
-    </footer>
-
+    
     <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
